@@ -176,9 +176,9 @@
   async function loadPublishedSiteData() {
     if (window.__SITE_DATA__ || !location.protocol.startsWith("http")) return false;
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
+    const timeout = setTimeout(() => controller.abort(), 25000);
     try {
-      const response = await fetch("site-data.json?v=20261122-2", {
+      const response = await fetch("site-data-v3.json?v=20261122-5", {
         cache: "no-store",
         signal: controller.signal
       });
