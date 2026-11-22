@@ -96,6 +96,9 @@
   let musicIsPlaying = false;
   let musicHasStarted = false;
   let currentTrackId = "shortTrack";
+  let musicPreloadPromise = null;
+  let heartClickCount = 0;
+  let loveEggTimer = null;
 
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
@@ -560,9 +563,11 @@
   function setupCake() {
     const cake = $("#cakeButton");
     const replay = $("#wishReplay");
+    const candleHint = $("#candleActionHint");
     const blow = () => {
       if (cake.classList.contains("extinguished")) return;
       cake.classList.add("extinguished");
+      candleHint.classList.add("hidden");
       cake.setAttribute("aria-label", "蜡烛已经吹灭");
       setText("cakeTip", "愿望已经收到，一定会实现");
       replay.classList.add("visible");
@@ -573,6 +578,7 @@
     cake.addEventListener("click", blow);
     replay.addEventListener("click", () => {
       cake.classList.remove("extinguished");
+      candleHint.classList.remove("hidden");
       cake.setAttribute("aria-label", "点击吹灭蜡烛");
       setText("cakeTip", "闭上眼睛，再许一个愿吧");
       replay.classList.remove("visible");
@@ -585,7 +591,40 @@
     button.setAttribute("aria-label", playing ? "暂停背景音乐" : "播放背景音乐");
   }
 
+  function ensureMusicReady() {
+    if (musicPreloadPromise) return musicPreloadPromise;
+    const tracks = {
+      shortTrack: "assets/birthday-short.mp3",
+      coralTrack: "assets/coral-sea.mp3"
+    };
+    musicPreloadPromise = Promise.all(
+      Object.entries(tracks).map(async ([id, source]) => {
+        const response = await fetch(source, { cache: "force-cache" });
+        if (!response.ok) throw new Error(`Music download failed: ${source}`);
+        const blob = await response.blob();
+        const element = document.getElementById(id);
+        element.src = URL.createObjectURL(blob);
+        element.load();
+      })
+    ).then(() => true).catch((error) => {
+      console.warn(error);
+      musicPreloadPromise = null;
+      return false;
+    });
+    return musicPreloadPromise;
+  }
+
+  function scheduleMusicPreload() {
+    const start = () => ensureMusicReady();
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(start, { timeout: 1800 });
+    } else {
+      setTimeout(start, 700);
+    }
+  }
+
   async function playMusicTrack(trackId, restart = false) {
+    await ensureMusicReady();
     const track = document.getElementById(trackId);
     if (!track) return false;
     if (restart) track.currentTime = 0;
@@ -644,8 +683,12 @@
   function setupMusicGate() {
     const gate = $("#musicGate");
     const startButton = $("#musicStartButton");
+    const startLabel = $(".music-start-label");
     startButton.addEventListener("click", async () => {
       startButton.disabled = true;
+      startLabel.textContent = "正在准备音乐…";
+      await ensureMusicReady();
+      startLabel.textContent = "开启生日音乐";
       if (!musicIsPlaying) await toggleMusic();
       if (!musicIsPlaying) {
         startButton.disabled = false;
@@ -932,22 +975,78 @@
     $("#letterClose").addEventListener("click", () => closeLetter(true));
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
-      if ($("#fullLetter").classList.contains("open")) closeLetter(true);
+      if ($("#loveEasterEgg").classList.contains("open")) closeLoveEasterEgg();
+      else if ($("#fullLetter").classList.contains("open")) closeLetter(true);
       else if ($("#lightbox").classList.contains("open")) closeLightbox();
       else if ($("#editorDrawer").classList.contains("open")) closeEditor();
     });
   }
 
   function setupFinale() {
-    $("#finaleHeart").addEventListener("click", (event) => {
+    const heartButton = $("#finaleHeart");
+    heartButton.addEventListener("click", (event) => {
       const button = event.currentTarget;
       const rect = button.getBoundingClientRect();
       for (let index = 0; index < 8; index += 1) {
         setTimeout(() => spawnHeart(button), index * 70);
       }
       burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 45);
-      showToast("收到啦，也把今天的好运送给你");
+
+      heartClickCount += 1;
+      button.classList.remove("charged");
+      void button.offsetWidth;
+      button.classList.add("charged");
+      button.style.setProperty("--heart-charge", String(Math.min(heartClickCount / 7, 1)));
+
+      if (heartClickCount >= 7) {
+        showLoveEasterEgg();
+      } else if (heartClickCount >= 4) {
+        showToast(`再点 ${7 - heartClickCount} 下，有一个小秘密`);
+      } else {
+        showToast("收到啦，也把今天的好运送给你");
+      }
     });
+  }
+
+  function createEasterEggHearts() {
+    const field = $("#loveEggHearts");
+    const colors = ["#f1bcb0", "#e6877a", "#edf7f3", "#d1af7f"];
+    const fragment = document.createDocumentFragment();
+    for (let index = 0; index < 26; index += 1) {
+      const heart = document.createElement("span");
+      heart.className = "egg-floating-heart";
+      heart.textContent = "♥";
+      heart.style.setProperty("--x", `${3 + Math.random() * 94}%`);
+      heart.style.setProperty("--size", `${11 + Math.random() * 26}px`);
+      heart.style.setProperty("--duration", `${3.5 + Math.random() * 3.5}s`);
+      heart.style.setProperty("--delay", `${Math.random() * 1.6}s`);
+      heart.style.setProperty("--color", colors[Math.floor(Math.random() * colors.length)]);
+      fragment.appendChild(heart);
+    }
+    field.replaceChildren(fragment);
+  }
+
+  function showLoveEasterEgg() {
+    const egg = $("#loveEasterEgg");
+    $("#toast").classList.remove("show");
+    createEasterEggHearts();
+    egg.classList.add("open");
+    egg.setAttribute("aria-hidden", "false");
+    document.body.classList.add("love-egg-open");
+    heartClickCount = 0;
+    $("#finaleHeart").style.setProperty("--heart-charge", "0");
+    burstConfetti(window.innerWidth / 2, window.innerHeight * 0.64, 120);
+    clearTimeout(loveEggTimer);
+    loveEggTimer = setTimeout(() => closeLoveEasterEgg(), 7500);
+  }
+
+  function closeLoveEasterEgg() {
+    const egg = $("#loveEasterEgg");
+    if (!egg.classList.contains("open")) return;
+    clearTimeout(loveEggTimer);
+    egg.classList.remove("open");
+    egg.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("love-egg-open");
   }
 
   function init() {
@@ -963,6 +1062,7 @@
     setupCursorGlow();
     setupMusicPlaylist();
     setupMusicGate();
+    scheduleMusicPreload();
     setupSiteDataExportShortcut();
     createStarField($("#heroStarField"), 34);
     createStarField($("#finaleStars"), 44);
@@ -970,6 +1070,8 @@
     resizeConfettiCanvas();
     window.addEventListener("resize", resizeConfettiCanvas);
     $("#musicButton").addEventListener("click", toggleMusic);
+    $("#loveEggClose").addEventListener("click", closeLoveEasterEgg);
+    $("#loveEasterEgg").addEventListener("click", closeLoveEasterEgg);
     $("#loadingScreen").classList.add("loaded");
     $$(".hero .reveal").forEach((item) => item.classList.add("in-view"));
   }
