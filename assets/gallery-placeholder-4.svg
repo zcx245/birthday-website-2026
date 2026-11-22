@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#aaa98a"/>
+      <stop offset="1" stop-color="#646854"/>
+    </linearGradient>
+    <radialGradient id="light"><stop stop-color="#fff6de"/><stop offset="1" stop-color="#e7c79f" stop-opacity=".24"/></radialGradient>
+  </defs>
+  <rect width="900" height="700" fill="url(#bg)"/>
+  <path d="M80 117h740v521H80Z" fill="#dcc8ab"/>
+  <path d="M80 117h740v521H80Z" fill="url(#light)"/>
+  <path d="M0 0h900v117H0Z" fill="#43393a" opacity=".72"/>
+  <rect x="190" y="92" width="520" height="30" fill="#3c3233" opacity=".8"/>
+  <g transform="translate(250 318)">
+    <path d="M14 48h427v35H14Z" fill="#644e48"/>
+    <path d="M34 83h29v180H34ZM391 83h29v180h-29Z" fill="#6a514a"/>
+    <path d="M0 0h455v50H0Z" fill="#f6e8d7"/>
+  </g>
+  <g transform="translate(296 250)">
+    <ellipse cx="90" cy="174" rx="106" ry="24" fill="#6a514a" opacity=".23"/>
+    <path d="M27 80h129v113H27Z" fill="#f8e8d5"/>
+    <path d="M27 80h129v24H27Z" fill="#a95b66"/>
+    <path d="M63 73V37h62v36" fill="#e6c6ae"/>
+    <circle cx="94" cy="21" r="11" fill="#d9a164"/>
+    <path d="M92-4c6-16 20-23 35-14-4 18-17 25-35 14Z" fill="#a95b66"/>
+    <path d="M93 0c-15-12-29-8-36 8 11 13 25 10 36-8Z" fill="#c97f88"/>
+    <circle cx="94" cy="20" r="7" fill="#f2ce8b"/>
+  </g>
+  <g transform="translate(153 382)">
+    <path d="M0 0h108v87H0Z" fill="#f6ebdd"/>
+    <path d="M12 14h82v6H12ZM12 32h74v4H12ZM12 46h80v4H12Z" fill="#8e6b64" opacity=".46"/>
+  </g>
+  <g transform="translate(566 340)">
+    <path d="M0 17h100v101H0Z" fill="#f9eee0"/>
+    <path d="M100 35c32 2 32 48 0 51" fill="none" stroke="#f9eee0" stroke-width="14"/>
+    <path d="M0 17h100v17H0Z" fill="#9c555f"/>
+  </g>
+  <path d="M172 160c-4 189 30 326 92 412M738 149c4 202-42 352-116 437" fill="none" stroke="#5e6c51" stroke-width="8"/>
+  <g fill="#5e6c51">
+    <path d="M197 221c-49-31-81-16-86 25 34 20 65 10 86-25Z"/>
+    <path d="M230 311c41-43 75-40 92-3-28 32-59 33-92 3Z"/>
+    <path d="M708 247c44-35 77-23 87 17-32 27-64 21-87-17Z"/>
+  </g>
+  <g fill="#fff8ed" font-family="Georgia,serif" text-anchor="middle">
+    <text x="450" y="664" font-size="17" letter-spacing="5">HER HAPPY PLACE</text>
+  </g>
+</svg>

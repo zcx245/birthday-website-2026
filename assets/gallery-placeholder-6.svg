@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 1000">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#887b82"/>
+      <stop offset=".52" stop-color="#d0a69f"/>
+      <stop offset="1" stop-color="#e7c6a8"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#76646a"/>
+      <stop offset="1" stop-color="#3b3338"/>
+    </linearGradient>
+  </defs>
+  <rect width="780" height="1000" fill="url(#sky)"/>
+  <circle cx="552" cy="300" r="70" fill="#ffe8bd" opacity=".91"/>
+  <path d="M0 536c151-34 266-22 389 19 131 43 257 39 391-14v459H0Z" fill="url(#sea)"/>
+  <g stroke="#d8b69a" stroke-width="3" opacity=".36">
+    <path d="M56 609h298M472 642h241M137 686h350M488 731h208M34 776h325M448 823h248"/>
+  </g>
+  <path d="M0 478 142 426l107 38 102-85 125 84 111-54 105 53 88-43v92H0Z" fill="#9f8281" opacity=".55"/>
+  <g transform="translate(357 554)" fill="#2e292d">
+    <path d="M72-5c-12-37 6-62 35-69 32 10 44 40 27 72-18-12-38-12-62-3Z"/>
+    <circle cx="73" cy="30" r="29"/>
+    <path d="M31 101c15-23 34-31 56-23 24 11 35 43 34 104l-2 153-53 43-52-43V177c0-35 6-60 17-76Z"/>
+    <path d="M28 112c-37 24-46 69-26 134l25-9c-11-40-2-69 27-87Z"/>
+    <path d="M125 124c31 24 36 66 18 123l-25-8c13-37 7-63-16-81Z"/>
+    <path d="M48 74c15-8 29-7 43 2" fill="none" stroke="#2e292d" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g fill="#f1d4b0" opacity=".55">
+    <path d="M89 212c13-35 25-36 37 0-8 33-26 59-18 86-18-18-37-55-19-86Z"/>
+    <path d="M669 205c10-27 19-28 29 0-6 26-20 47-14 69-14-15-29-44-15-69Z"/>
+  </g>
+  <g fill="#fff8ed" font-family="Georgia,serif" text-anchor="middle">
+    <text x="390" y="77" font-size="17" letter-spacing="6">SHE IS A WHOLE ADVENTURE</text>
+    <text x="390" y="941" font-size="17" font-style="italic" opacity=".78">shining wherever she goes</text>
+  </g>
+</svg>

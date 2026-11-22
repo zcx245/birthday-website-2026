@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#aaa082"/>
+      <stop offset="1" stop-color="#6c6b58"/>
+    </linearGradient>
+    <radialGradient id="light">
+      <stop stop-color="#fff1d7" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#e2ba8b" stop-opacity=".18"/>
+    </radialGradient>
+  </defs>
+  <rect width="900" height="760" fill="url(#bg)"/>
+  <path d="M65 184h770v502H65Z" fill="#d6b996"/>
+  <path d="M65 184h770v502H65Z" fill="url(#light)"/>
+  <path d="M65 184h770v27H65Z" fill="#6c5050" opacity=".58"/>
+  <path d="M430 88h40v96h-40zM450 59l74 54H376Z" fill="#3e3234" opacity=".72"/>
+  <ellipse cx="440" cy="557" rx="278" ry="130" fill="#80675a" opacity=".31"/>
+  <ellipse cx="440" cy="557" rx="257" ry="113" fill="#f0dfc8"/>
+  <g transform="translate(420 315)" fill="#3c3032">
+    <path d="M91 5c-9-34 9-62 43-69 33 6 50 33 42 72-20-15-47-15-85-3Z"/>
+    <circle cx="102" cy="44" r="34"/>
+    <path d="M55 126c18-21 38-28 61-22 25 8 38 34 41 76l-2 132H56Z"/>
+    <path d="M60 137c-46 19-63 58-52 117l25 2c-2-40 14-66 48-77Z"/>
+    <path d="M147 164c25 17 31 55 18 115l-26-8c10-35 3-57-19-69Z"/>
+    <path d="M65 76c17-9 34-8 50 2" fill="none" stroke="#3c3032" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(633 504)">
+    <ellipse cx="96" cy="93" rx="87" ry="37" fill="#4b3739" opacity=".75"/>
+    <path d="M28 64c7-35 31-47 58-29 10-20 47-15 48 11l-7 42Z" fill="#4b3739"/>
+    <circle cx="60" cy="44" r="25" fill="#4b3739"/>
+    <path d="m45 24 7-21 13 22M69 22l16-17 3 25" fill="#4b3739"/>
+  </g>
+  <g transform="translate(194 501)">
+    <path d="M0 18h109v94H0Z" fill="#f9eee0"/>
+    <path d="M0 18h109v17H0Z" fill="#9c555f"/>
+    <path d="M109 34c35 2 35 48 0 51" fill="none" stroke="#f9eee0" stroke-width="14"/>
+    <path d="M46 0c-7-24 14-25 9-46M78 0c6-21-8-26 3-43" fill="none" stroke="#fff5e8" stroke-width="5" stroke-linecap="round" opacity=".76"/>
+  </g>
+  <g fill="#fff8ed" font-family="Georgia,serif" text-anchor="middle">
+    <text x="450" y="720" font-size="18" letter-spacing="6">HER LITTLE MOMENTS OF JOY</text>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#d9a69b"/>
+      <stop offset=".56" stop-color="#efc5a6"/>
+      <stop offset="1" stop-color="#9c7c74"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#82606a"/>
+      <stop offset="1" stop-color="#44383f"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <circle cx="788" cy="336" r="98" fill="#ffe9bd"/>
+  <circle cx="788" cy="336" r="145" fill="#ffe9bd" opacity=".24" filter="url(#glow)"/>
+  <path d="M0 494c142-34 244-42 384-13 172 35 335 35 499-16 122-38 220-29 317-3v338H0Z" fill="url(#field)"/>
+  <g stroke="#efc9a8" stroke-width="3" opacity=".32">
+    <path d="M663 497h255M703 526h200M580 559h327M742 602h211M827 646h187M687 689h312"/>
+  </g>
+  <g transform="translate(489 440)" fill="#34282c">
+    <path d="M92-8c-13-42 8-69 40-78 36 11 48 44 29 81-20-13-43-14-69-3Z"/>
+    <circle cx="94" cy="31" r="32"/>
+    <path d="M47 113c18-25 39-34 63-25 27 13 38 48 37 114l-2 153-56 60-58-58-1-157c1-39 7-68 17-87Z"/>
+    <path d="M41 125c-43 28-53 80-30 157l29-10c-13-48-3-82 31-104Z"/>
+    <path d="M156 139c35 28 41 80 19 149l-29-11c15-44 8-76-20-97Z"/>
+    <path d="M58 78c16-10 32-9 48 1" fill="none" stroke="#34282c" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g fill="#fff8ed" font-family="Georgia,serif" text-anchor="middle">
+    <text x="600" y="744" font-size="19" letter-spacing="7">THE WORLD LOOKS BRIGHTER WITH HER</text>
+  </g>
+</svg>

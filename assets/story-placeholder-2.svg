@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#d7a29b"/>
+      <stop offset=".5" stop-color="#efc6a8"/>
+      <stop offset="1" stop-color="#f4e0c8"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#817069"/>
+      <stop offset="1" stop-color="#4d3e40"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="21"/></filter>
+  </defs>
+  <rect width="900" height="760" fill="url(#sky)"/>
+  <circle cx="648" cy="228" r="80" fill="#fff0c9" opacity=".92"/>
+  <circle cx="648" cy="228" r="116" fill="#fff1cb" opacity=".22" filter="url(#blur)"/>
+  <path d="M0 488 137 366l110 89 137-198 126 170 128-133 153 181 109-75v360H0Z" fill="#9c7a73" opacity=".75"/>
+  <path d="M0 556 153 460l160 101 153-115 151 114 103-67 180 114v153H0Z" fill="url(#hill)"/>
+  <path d="M278 726c74-45 144-58 211-40 64 17 130 16 201-7" fill="none" stroke="#ddc2a3" stroke-width="4" opacity=".5"/>
+  <g transform="translate(424 498)" fill="#3b2b2f">
+    <path d="M90 26c-15-45 7-77 44-90 41 15 55 50 33 92-22-18-48-19-77-2Z"/>
+    <circle cx="92" cy="62" r="34"/>
+    <path d="M44 146c22-24 48-32 75-23 24 14 35 48 34 102l-8 115-60 44-55-46-3-117c2-35 8-60 17-75Z"/>
+    <path d="M39 155c-40 24-49 67-27 128l28-9c-9-37 1-64 29-81Z"/>
+    <path d="M155 166c35 22 41 64 19 125l-28-10c13-38 4-65-22-85Z"/>
+    <path d="M61 384c-20 48-31 97-34 148l45 4c11-50 27-93 48-131Z"/>
+    <path d="M119 398c11 44 16 89 14 135l-44 3c-6-47-17-90-32-129Z"/>
+    <path d="M55 65c17-13 34-13 51-1" fill="none" stroke="#3b2b2f" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g fill="#fff8ed" font-family="Georgia,serif" text-anchor="middle">
+    <text x="450" y="694" font-size="18" letter-spacing="6">SHINING IN HER OWN WAY</text>
+  </g>
+</svg>

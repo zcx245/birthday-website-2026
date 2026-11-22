@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 1060">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#76a4a5"/>
+      <stop offset=".52" stop-color="#407683"/>
+      <stop offset="1" stop-color="#173a49"/>
+    </linearGradient>
+    <linearGradient id="sun" x1=".2" y1="0" x2=".8" y2="1">
+      <stop stop-color="#fff7df"/>
+      <stop offset="1" stop-color="#f0bd93"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="28"/></filter>
+    <pattern id="grain" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="4" r=".6" fill="#fff" opacity=".18"/>
+      <circle cx="15" cy="12" r=".5" fill="#092733" opacity=".08"/>
+    </pattern>
+  </defs>
+  <rect width="840" height="1060" fill="url(#bg)"/>
+  <circle cx="680" cy="225" r="227" fill="#e5947d" opacity=".24" filter="url(#blur)"/>
+  <circle cx="149" cy="848" r="260" fill="#0b2c3b" opacity=".24" filter="url(#blur)"/>
+  <circle cx="557" cy="389" r="178" fill="url(#sun)" opacity=".92"/>
+  <path d="M0 754c126-58 246-32 362 31 115 62 255 71 478-27v302H0Z" fill="#2e6675" opacity=".5"/>
+  <path d="M0 838c141-53 271-18 387 45 136 73 282 62 453-26v203H0Z" fill="#0c2c3a" opacity=".64"/>
+  <path d="M622 760c-18 46-12 101 17 165M622 829c-35-35-64-36-87-6 25 31 54 34 87 6ZM660 866c-37-31-67-27-86 8 27 27 57 25 86-8ZM625 905c-29-30-57-25-71 13 25 22 49 18 71-13Z" fill="none" stroke="#d9776c" stroke-width="5" stroke-linecap="round" opacity=".48"/>
+  <g transform="translate(90 540)" fill="#09232f" opacity=".93">
+    <path d="M79 42c-4-36 12-66 44-71 37 5 54 39 46 82-17-22-55-25-90-11Z"/>
+    <path d="M105 29c16-16 37-17 55-3" fill="none" stroke="#09232f" stroke-width="20" stroke-linecap="round"/>
+    <circle cx="127" cy="72" r="41"/>
+    <path d="M72 151c16-20 36-28 61-22 20 14 31 36 34 73 7 90-2 180-30 278H64c-21-108-25-212-10-291 3-17 9-30 18-38Z"/>
+    <path d="M62 181c-32 21-45 71-36 149 5 44 22 77 49 97l31-27c-25-33-37-75-34-125 2-26 12-46 29-61Z"/>
+    <path d="M190 186c32 25 40 72 25 141-9 41-28 72-57 93l-27-30c26-27 41-65 43-113 1-29-8-51-24-63Z"/>
+    <path d="M104 490c-22 58-36 122-42 192l37 8c21-70 45-133 71-187Z"/>
+    <path d="M162 494c18 59 28 122 27 191h-38c-9-70-24-132-43-188Z"/>
+  </g>
+  <g fill="none" stroke="#fff4e6" stroke-width="2" opacity=".68">
+    <path d="M310 243c25-25 43-20 49 6-19 18-39 15-49-6Z"/>
+    <path d="M263 305c15-29 36-33 55-13-9 25-30 34-55 13Z"/>
+    <path d="M538 301c20-28 41-29 54-4-12 22-32 28-54 4Z"/>
+    <path d="M314 266c28 8 46 23 53 44M286 303c20 19 29 39 27 59M566 318c17 13 26 29 26 49" stroke-linecap="round"/>
+  </g>
+  <path d="M0 0h840v1060H0Z" fill="url(#grain)"/>
+  <g fill="#edf7f3" font-family="Georgia,serif" text-anchor="middle">
+    <text x="420" y="143" font-size="17" letter-spacing="8">TODAY IS ALL ABOUT YOU</text>
+    <text x="420" y="196" font-size="46" font-style="italic">the birthday girl</text>
+    <text x="420" y="1002" font-family="'Microsoft YaHei',sans-serif" font-size="19" letter-spacing="5" opacity=".74">点击这里放入她的照片</text>
+  </g>
+  <path d="M333 233h174" stroke="#edf7f3" stroke-width="1" opacity=".6"/>
+</svg>

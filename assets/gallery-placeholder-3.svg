@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#6c6b70"/>
+      <stop offset="1" stop-color="#332d34"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#c8a98c"/>
+      <stop offset="1" stop-color="#6f5b54"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="780" fill="url(#bg)"/>
+  <g fill="#252429">
+    <path d="M0 180h268v521H0Z"/><path d="M960 85h240v616H960Z"/>
+    <path d="M310 272h211v430H310Z"/><path d="M714 309h174v393H714Z"/>
+  </g>
+  <g fill="#e6c58f" opacity=".75">
+    <path d="M44 233h76v94H44Z"/><path d="M152 233h76v94h-76Z"/>
+    <path d="M1014 158h66v85h-66Z"/><path d="M1104 158h58v85h-58Z"/>
+    <path d="M352 325h55v67h-55Z"/><path d="M435 325h55v67h-55Z"/>
+  </g>
+  <path d="M552 780 503 297h174l-70 483Z" fill="url(#road)"/>
+  <path d="M584 771 569 661M578 610l-7-80M570 498l-5-67" stroke="#f2d9ae" stroke-width="11" stroke-linecap="round" opacity=".8"/>
+  <circle cx="588" cy="194" r="55" fill="#dcb47f" opacity=".48"/>
+  <g transform="translate(531 498)" fill="#29252b">
+    <path d="M75-6c-12-37 7-61 35-69 32 10 43 39 26 72-18-12-38-13-61-3Z"/>
+    <circle cx="77" cy="29" r="28"/>
+    <path d="M35 101c16-22 35-30 57-22 23 11 33 42 32 100l-1 134-52 50-51-49V182c0-35 5-62 15-81Z"/>
+    <path d="M32 113c-37 24-46 68-26 133l25-9c-11-40-2-70 27-88Z"/>
+    <path d="M132 124c31 24 36 67 17 125l-25-9c13-37 7-64-17-82Z"/>
+  </g>
+  <g fill="#fff8ed" font-family="Georgia,serif" text-anchor="middle">
+    <text x="600" y="711" font-size="18" letter-spacing="6">WALKING THROUGH THE WORLD, BRIGHTLY</text>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#d8c1ae"/>
+      <stop offset="1" stop-color="#9d7774"/>
+    </linearGradient>
+    <linearGradient id="light" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#fff8e9"/>
+      <stop offset="1" stop-color="#e9c5a9"/>
+    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="900" height="760" fill="url(#bg)"/>
+  <rect x="82" y="72" width="736" height="532" rx="3" fill="#3c2b2e"/>
+  <rect x="106" y="96" width="688" height="484" fill="url(#light)"/>
+  <circle cx="642" cy="229" r="77" fill="#dda27e" opacity=".75"/>
+  <path d="M106 451c112-43 217-38 329 16 113 55 233 48 359-23v136H106Z" fill="#998176" opacity=".74"/>
+  <path d="M106 498c132-44 245-5 352 52 111 59 221 45 336-16v46H106Z" fill="#705a57" opacity=".55"/>
+  <path d="M450 96v484M106 336h688" stroke="#654b4d" stroke-width="12" opacity=".54"/>
+  <g transform="translate(329 346)" fill="#3c2b2e">
+    <path d="M97 0c18 19 20 44 8 72-12-28-30-52-58-72Z"/>
+    <circle cx="107" cy="65" r="35"/>
+    <path d="M54 154c16-26 37-39 62-38 29 1 51 20 66 57l-3 149H47Z"/>
+    <path d="M69 166c-43 28-55 79-37 151l27-8c-7-46 4-76 33-92Z"/>
+    <path d="M209 173c25 31 25 72 0 122l-20-10c17-31 15-59-6-84Z"/>
+    <path d="M108 126c20 12 40 12 61 0" fill="none" stroke="#3c2b2e" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <circle cx="808" cy="668" r="91" fill="#6f4c55" opacity=".17" filter="url(#soft)"/>
+  <g fill="#fff8ed" font-family="Georgia,serif" text-anchor="middle">
+    <text x="450" y="707" font-size="18" letter-spacing="6">SHE MAKES THE WHOLE ROOM BRIGHTER</text>
+  </g>
+</svg>

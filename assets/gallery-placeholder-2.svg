@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#e0c8b4"/>
+      <stop offset="1" stop-color="#9c7673"/>
+    </linearGradient>
+    <linearGradient id="vase" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7a5559"/>
+      <stop offset="1" stop-color="#413339"/>
+    </linearGradient>
+  </defs>
+  <rect width="780" height="1000" fill="url(#bg)"/>
+  <path d="M104 150h572v710H104Z" fill="#f1e2d0" opacity=".31"/>
+  <path d="M390 759c-7-112 19-244 73-373M391 761c-37-125-98-219-191-283M389 762c54-138 132-227 224-268" fill="none" stroke="#5c6852" stroke-width="7"/>
+  <g fill="#6c795e">
+    <path d="M326 654c-82-48-129-23-139 36 57 29 107 13 139-36Z"/>
+    <path d="M433 584c39-72 86-89 124-51-14 56-56 76-124 51Z"/>
+    <path d="M362 511c-59-43-93-31-102 14 42 25 80 20 102-14Z"/>
+    <path d="M488 470c27-60 65-78 101-49-5 50-39 71-101 49Z"/>
+    <path d="M272 444c-57-38-91-24-96 22 43 21 78 13 96-22Z"/>
+  </g>
+  <g fill="#a14f5e">
+    <circle cx="281" cy="373" r="50"/><circle cx="337" cy="344" r="46"/><circle cx="366" cy="399" r="43"/>
+    <circle cx="477" cy="350" r="48"/><circle cx="530" cy="373" r="44"/><circle cx="510" cy="424" r="41"/>
+    <circle cx="181" cy="533" r="47"/><circle cx="230" cy="529" r="43"/><circle cx="209" cy="577" r="40"/>
+  </g>
+  <g fill="#d78a91">
+    <circle cx="265" cy="522" r="39"/><circle cx="306" cy="502" r="34"/><circle cx="301" cy="552" r="33"/>
+    <circle cx="441" cy="500" r="39"/><circle cx="477" cy="484" r="33"/><circle cx="477" cy="529" r="31"/>
+    <circle cx="586" cy="477" r="37"/><circle cx="625" cy="502" r="35"/><circle cx="602" cy="537" r="32"/>
+  </g>
+  <path d="M280 765h220l-34 160H315Z" fill="url(#vase)"/>
+  <ellipse cx="390" cy="766" rx="111" ry="29" fill="#4a363b"/>
+  <g fill="#fff8ed" font-family="Georgia,serif" text-anchor="middle">
+    <text x="390" y="86" font-size="17" letter-spacing="6">BLOOMING LIKE HER</text>
+    <text x="390" y="961" font-size="15" letter-spacing="4" opacity=".72">pretty things for a pretty soul</text>
+  </g>
+</svg>
