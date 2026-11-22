@@ -632,9 +632,7 @@
       gate.setAttribute("aria-hidden", "true");
       document.body.classList.remove("intro-locked");
     });
-    window.addEventListener("load", () => {
-      setTimeout(() => startButton.focus({ preventScroll: true }), 650);
-    });
+    setTimeout(() => startButton.focus({ preventScroll: true }), 800);
   }
 
   const confettiState = {
@@ -940,10 +938,19 @@
     resizeConfettiCanvas();
     window.addEventListener("resize", resizeConfettiCanvas);
     $("#musicButton").addEventListener("click", toggleMusic);
-    window.addEventListener("load", () => {
-      setTimeout(() => $("#loadingScreen").classList.add("loaded"), 380);
-      setTimeout(() => $$(".hero .reveal").forEach((item) => item.classList.add("in-view")), 120);
-    });
+    let loadingRevealed = false;
+    const revealPage = () => {
+      if (loadingRevealed) return;
+      loadingRevealed = true;
+      $("#loadingScreen").classList.add("loaded");
+      $$(".hero .reveal").forEach((item) => item.classList.add("in-view"));
+    };
+    if (document.readyState === "complete") {
+      setTimeout(revealPage, 250);
+    } else {
+      document.addEventListener("DOMContentLoaded", () => setTimeout(revealPage, 250), { once: true });
+      setTimeout(revealPage, 1500);
+    }
   }
 
   async function bootstrap() {
