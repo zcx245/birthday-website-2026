@@ -6,7 +6,9 @@
   <meta name="theme-color" content="#f8efe8">
   <meta name="description" content="一个只属于她的生日网站，收藏她闪闪发光的每一面。">
   <title>致亲爱的你 · 生日快乐</title>
+  <link rel="preload" href="assets/photos/hero.jpg" as="image" type="image/jpeg" fetchpriority="high">
   <link rel="stylesheet" href="styles.css?v=20261123-4">
+  <script src="app.js?v=20261123-speed-2" defer></script>
 </head>
 <body class="intro-locked">
   <div class="grain" aria-hidden="true"></div>
@@ -101,7 +103,7 @@
         <span class="orbit orbit-two" aria-hidden="true">♡</span>
         <figure class="portrait-card" data-image-slot="hero">
           <div class="portrait-inner">
-            <img id="heroImage" src="assets/hero-placeholder.svg" alt="她的照片">
+            <img id="heroImage" src="assets/photos/hero.jpg" alt="她的照片" width="750" height="1000" loading="eager" decoding="async" fetchpriority="high">
             <span class="image-hint">点击查看大图</span>
           </div>
           <figcaption>
@@ -188,7 +190,7 @@
         <article class="story-item reveal">
           <div class="story-number">01</div>
           <figure class="story-photo tilt-left" data-image-slot="story1">
-            <img id="storyImage1" src="assets/story-placeholder-1.svg" alt="她笑起来的样子">
+            <img id="storyImage1" src="assets/photos/story1.jpg" alt="她笑起来的样子" width="750" height="1000" loading="lazy" decoding="async">
             <span class="image-hint">点击查看大图</span>
             <span class="photo-index">HER BRIGHTEST SMILE</span>
           </figure>
@@ -205,7 +207,7 @@
         <article class="story-item story-item-reverse reveal">
           <div class="story-number">02</div>
           <figure class="story-photo tilt-right" data-image-slot="story2">
-            <img id="storyImage2" src="assets/story-placeholder-2.svg" alt="她认真生活的样子">
+            <img id="storyImage2" src="assets/photos/story2.jpg" alt="她认真生活的样子" width="750" height="1000" loading="lazy" decoding="async">
             <span class="image-hint">点击查看大图</span>
             <span class="photo-index">SHINING IN HER OWN WAY</span>
           </figure>
@@ -222,7 +224,7 @@
         <article class="story-item reveal">
           <div class="story-number">03</div>
           <figure class="story-photo tilt-left" data-image-slot="story3">
-            <img id="storyImage3" src="assets/story-placeholder-3.svg" alt="她安静美好的样子">
+            <img id="storyImage3" src="assets/photos/story3.jpg" alt="她安静美好的样子" width="750" height="1000" loading="lazy" decoding="async">
             <span class="image-hint">点击查看大图</span>
             <span class="photo-index">HER LITTLE ROMANCE</span>
           </figure>
@@ -269,7 +271,7 @@
 
       <div class="gallery-grid">
         <figure class="gallery-item gallery-main reveal" data-image-slot="gallery1">
-          <img id="galleryImage1" src="assets/gallery-placeholder-1.svg" alt="她的照片">
+          <img id="galleryImage1" src="assets/photos/gallery1.jpg" alt="她的照片" width="463" height="1000" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>01</span>
@@ -277,7 +279,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item gallery-tall reveal" data-image-slot="gallery2" data-delay="80">
-          <img id="galleryImage2" src="assets/gallery-placeholder-2.svg" alt="她的照片">
+          <img id="galleryImage2" src="assets/photos/gallery2.jpg" alt="她的照片" width="750" height="1000" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>02</span>
@@ -285,7 +287,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item gallery-wide reveal" data-image-slot="gallery3" data-delay="120">
-          <img id="galleryImage3" src="assets/gallery-placeholder-3.svg" alt="她的照片">
+          <img id="galleryImage3" src="assets/photos/gallery3.jpg" alt="她的照片" width="750" height="1000" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>03</span>
@@ -293,7 +295,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item reveal" data-image-slot="gallery4" data-delay="80">
-          <img id="galleryImage4" src="assets/gallery-placeholder-4.svg" alt="她的照片">
+          <img id="galleryImage4" src="assets/photos/gallery4.jpg" alt="她的照片" width="750" height="1000" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>04</span>
@@ -301,7 +303,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item reveal" data-image-slot="gallery5" data-delay="140">
-          <img id="galleryImage5" src="assets/gallery-placeholder-5.svg" alt="她的照片">
+          <img id="galleryImage5" src="assets/photos/gallery5.jpg" alt="她的照片" width="800" height="1000" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>05</span>
@@ -309,7 +311,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item gallery-tall reveal" data-image-slot="gallery6" data-delay="180">
-          <img id="galleryImage6" src="assets/gallery-placeholder-6.svg" alt="她的照片">
+          <img id="galleryImage6" src="assets/photos/gallery6.jpg" alt="她的照片" width="750" height="1000" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>06</span>
@@ -518,43 +520,43 @@
       <div class="editor-panel" data-panel="story">
         <div class="image-editor-list">
           <button class="image-editor-item" type="button" data-pick-image="hero">
-            <img src="assets/hero-placeholder.svg" alt="" data-preview-for="hero">
+            <img alt="" data-preview-for="hero">
             <span><b>首页主照片</b><small>点击上传</small></span>
           </button>
           <button class="image-editor-item" type="button" data-pick-image="story1">
-            <img src="assets/story-placeholder-1.svg" alt="" data-preview-for="story1">
+            <img alt="" data-preview-for="story1">
             <span><b>她的照片 01</b><small>点击上传</small></span>
           </button>
           <button class="image-editor-item" type="button" data-pick-image="story2">
-            <img src="assets/story-placeholder-2.svg" alt="" data-preview-for="story2">
+            <img alt="" data-preview-for="story2">
             <span><b>她的照片 02</b><small>点击上传</small></span>
           </button>
           <button class="image-editor-item" type="button" data-pick-image="story3">
-            <img src="assets/story-placeholder-3.svg" alt="" data-preview-for="story3">
+            <img alt="" data-preview-for="story3">
             <span><b>她的照片 03</b><small>点击上传</small></span>
           </button>
           <button class="image-editor-item" type="button" data-pick-image="gallery1">
-            <img src="assets/gallery-placeholder-1.svg" alt="" data-preview-for="gallery1">
+            <img alt="" data-preview-for="gallery1">
             <span><b>照片日记 01</b><small>点击上传</small></span>
           </button>
           <button class="image-editor-item" type="button" data-pick-image="gallery2">
-            <img src="assets/gallery-placeholder-2.svg" alt="" data-preview-for="gallery2">
+            <img alt="" data-preview-for="gallery2">
             <span><b>照片日记 02</b><small>点击上传</small></span>
           </button>
           <button class="image-editor-item" type="button" data-pick-image="gallery3">
-            <img src="assets/gallery-placeholder-3.svg" alt="" data-preview-for="gallery3">
+            <img alt="" data-preview-for="gallery3">
             <span><b>照片日记 03</b><small>点击上传</small></span>
           </button>
           <button class="image-editor-item" type="button" data-pick-image="gallery4">
-            <img src="assets/gallery-placeholder-4.svg" alt="" data-preview-for="gallery4">
+            <img alt="" data-preview-for="gallery4">
             <span><b>照片日记 04</b><small>点击上传</small></span>
           </button>
           <button class="image-editor-item" type="button" data-pick-image="gallery5">
-            <img src="assets/gallery-placeholder-5.svg" alt="" data-preview-for="gallery5">
+            <img alt="" data-preview-for="gallery5">
             <span><b>照片日记 05</b><small>点击上传</small></span>
           </button>
           <button class="image-editor-item" type="button" data-pick-image="gallery6">
-            <img src="assets/gallery-placeholder-6.svg" alt="" data-preview-for="gallery6">
+            <img alt="" data-preview-for="gallery6">
             <span><b>照片日记 06</b><small>点击上传</small></span>
           </button>
         </div>
@@ -682,6 +684,5 @@
   <audio id="shortTrack" src="assets/birthday-short.mp3" preload="none"></audio>
   <audio id="coralTrack" src="assets/coral-sea.mp3" preload="none"></audio>
 
-  <script src="app.js?v=20261123-final-2"></script>
 </body>
 </html>
