@@ -62,16 +62,16 @@
     "letterBody": "见字如面。\n今天想把所有最真诚的祝福都送给你。你认真生活、温柔待人的样子，一直都很耀眼，希望你也能看见自己的光。\n喜欢看你分享的小事和照片，喜欢你素颜对我笑的样子，喜欢你的小脾气。希望新的一岁，你能更常常为自己开心。\n新的一岁，愿你有数不清的快乐，也有足够的底气面对所有未知。愿你永远自在、明亮，做最真实的自己。\n愿你想去的地方都能抵达，想做的事都有回应；愿世界对你温柔，也愿你始终拥有爱自己的勇气。\n虽然我们可能走不到最后，但现在，我只想好好珍惜和你的每一天\n生日快乐。",
     "letterSignature": "一直喜欢你的人",
     "images": {
-      "hero": "assets/photos/hero.jpg",
-      "story1": "assets/photos/story1.jpg",
-      "story2": "assets/photos/story2.jpg",
-      "story3": "assets/photos/story3.jpg",
-      "gallery1": "assets/photos/gallery1.jpg",
-      "gallery2": "assets/photos/gallery2.jpg",
-      "gallery3": "assets/photos/gallery3.jpg",
-      "gallery4": "assets/photos/gallery4.jpg",
-      "gallery5": "assets/photos/gallery5.jpg",
-      "gallery6": "assets/photos/gallery6.jpg"
+      "hero": "assets/photos-fast/hero.webp",
+      "story1": "assets/photos-fast/story1.webp",
+      "story2": "assets/photos-fast/story2.webp",
+      "story3": "assets/photos-fast/story3.webp",
+      "gallery1": "assets/photos-fast/gallery1.webp",
+      "gallery2": "assets/photos-fast/gallery2.webp",
+      "gallery3": "assets/photos-fast/gallery3.webp",
+      "gallery4": "assets/photos-fast/gallery4.webp",
+      "gallery5": "assets/photos-fast/gallery5.webp",
+      "gallery6": "assets/photos-fast/gallery6.webp"
     }
   };
 
@@ -99,7 +99,7 @@
   const musicTrackPromises = new Map();
   const MUSIC_TRACKS = {
     shortTrack: "assets/birthday-short.mp3",
-    coralTrack: "assets/coral-sea.mp3?v=96k"
+    coralTrack: "assets/coral-sea.mp3?v=64k"
   };
   let musicWarmupStarted = false;
   let heartClickCount = 0;
@@ -226,7 +226,12 @@
   function applyImages() {
     Object.entries(IMAGE_ELEMENTS).forEach(([key, id]) => {
       const image = document.getElementById(id);
-      if (image) image.src = config.images[key];
+      if (!image) return;
+      if (image.hasAttribute("data-lazy-photo")) {
+        image.dataset.src = config.images[key];
+        return;
+      }
+      image.src = config.images[key];
     });
     $$("[data-preview-for]").forEach((image) => {
       const key = image.dataset.previewFor;
@@ -645,17 +650,14 @@
   function warmMusicLibrary() {
     if (musicWarmupStarted) return;
     musicWarmupStarted = true;
-    const start = () => {
-      ensureTrackReady("shortTrack");
+    ensureTrackReady("shortTrack");
+    const startCoral = () => {
       setTimeout(() => ensureTrackReady("coralTrack", true), 450);
     };
-    const hero = $("#heroImage");
-    if (hero?.complete) {
-      start();
-    } else if (hero) {
-      hero.addEventListener("load", start, { once: true });
+    if (document.readyState === "complete") {
+      startCoral();
     } else {
-      setTimeout(start, 1000);
+      window.addEventListener("load", startCoral, { once: true });
     }
   }
 
@@ -971,6 +973,31 @@
     });
   }
 
+  function setupPhotoLazyLoading() {
+    const images = $$("img[data-lazy-photo]");
+    const loadImage = (image) => {
+      const source = image.dataset.src;
+      if (!source) return;
+      image.src = source;
+      image.removeAttribute("data-src");
+      image.removeAttribute("data-lazy-photo");
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      images.forEach(loadImage);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        loadImage(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: "180px 0px", threshold: 0.01 });
+    images.forEach((image) => observer.observe(image));
+  }
+
   function setupEditor() {
     const editorFab = $("#editorFab");
     const quickEditButton = $("#quickEditButton");
@@ -1089,6 +1116,7 @@
   function init() {
     applyConfig();
     fillEditor();
+    setupPhotoLazyLoading();
     setupImageInteractions();
     setupEditor();
     setupLetter();
