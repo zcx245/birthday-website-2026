@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f8efe8">
+  <meta name="description" content="一个只属于她的生日网站，收藏她闪闪发光的每一面。">
+  <title>致亲爱的你 · 生日快乐</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="intro-locked">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <div class="loading-screen" id="loadingScreen" aria-hidden="true">
+    <div class="loading-mark">
+      <span class="loading-heart">♥</span>
+      <span class="loading-line"></span>
+      <small>正在准备一份小小的心意</small>
+    </div>
+  </div>
+
+  <div class="music-gate" id="musicGate" role="dialog" aria-modal="true" aria-labelledby="musicGateTitle">
+    <div class="music-gate-glow" aria-hidden="true"></div>
+    <div class="music-gate-inner">
+      <span class="music-gate-brand">FOR HER · HAPPY BIRTHDAY</span>
+      <div class="music-gate-record" aria-hidden="true">
+        <span class="record-ring"></span>
+        <span class="record-center">♥</span>
+        <span class="record-note note-one">♪</span>
+        <span class="record-note note-two">♫</span>
+      </div>
+      <p class="music-gate-kicker">BEFORE THE CELEBRATION</p>
+      <h2 id="musicGateTitle">先为今天，<br>放一首歌。</h2>
+      <p class="music-gate-copy">点击开启生日音乐<br>属于她的庆祝，从这一刻开始。</p>
+      <button class="music-start-button" id="musicStartButton" type="button">
+        <span class="music-start-icon" aria-hidden="true">▶</span>
+        <span>开启生日音乐</span>
+        <i class="music-start-wave" aria-hidden="true"><b></b><b></b><b></b><b></b></i>
+      </button>
+      <span class="music-gate-note">生日语音 → 珊瑚海 · 循环播放</span>
+    </div>
+    <span class="music-gate-foot">A LITTLE SOUNDTRACK FOR HER SPECIAL DAY</span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#home" aria-label="回到首页">
+      <span class="brand-mark">FOR HER</span>
+      <span class="brand-note">Happy birthday</span>
+    </a>
+    <nav class="main-nav" aria-label="页面导航">
+      <a href="#story">关于她</a>
+      <a href="#gallery">照片日记</a>
+      <a href="#wish">生日愿望</a>
+      <a href="#letter">写给你</a>
+    </nav>
+    <button class="music-button" id="musicButton" type="button" aria-label="播放背景音乐" aria-pressed="false">
+      <span class="music-disc" aria-hidden="true">♪</span>
+      <span class="music-label">献给她的歌</span>
+      <span class="equalizer" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+      <div class="hero-star-field" id="heroStarField" aria-hidden="true"></div>
+
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span> TODAY IS ALL ABOUT YOU </span></p>
+        <h1>
+          <span class="hero-line">生日快乐，</span>
+          <span class="hero-name" id="heroName">亲爱的你</span>
+        </h1>
+        <p class="hero-subtitle" id="heroSubtitle">
+          世界因为有你，<br>
+          多了一束永远明亮的光。
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#story">
+            走进她的照片日记
+            <span aria-hidden="true">↘</span>
+          </a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="meta-number" id="heroAge">18</span>
+            <span class="meta-label">岁，正好的年纪</span>
+          </div>
+          <span class="meta-divider" aria-hidden="true"></span>
+          <div class="hero-meta-item">
+            <span class="meta-number" id="heroBirthdayDay">今天</span>
+            <span class="meta-label">她的专属日子</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" data-delay="150">
+        <span class="orbit orbit-one" aria-hidden="true">today is yours</span>
+        <span class="orbit orbit-two" aria-hidden="true">♡</span>
+        <figure class="portrait-card" data-image-slot="hero">
+          <div class="portrait-inner">
+            <img id="heroImage" src="assets/hero-placeholder.svg" alt="她的照片">
+            <span class="image-hint">点击查看大图</span>
+          </div>
+          <figcaption>
+            <span>MY FAVORITE VIEW</span>
+            <em id="heroCaption">今天的女主角，闪闪发光</em>
+          </figcaption>
+          <span class="photo-tape" aria-hidden="true"></span>
+        </figure>
+        <div class="mini-note">
+          <span class="mini-note-date" id="heroDate">某年 · 某月 · 某一天</span>
+          <p id="heroNote">今天不用做任何事，只要开开心心做自己。</p>
+          <span class="mini-note-sign" id="heroSign">Love, 我</span>
+        </div>
+        <div class="floating-flower flower-one" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="floating-flower flower-two" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <a class="scroll-cue" href="#intro" aria-label="继续向下浏览">
+        <span>SCROLL TO HER DAY</span>
+        <i aria-hidden="true"></i>
+      </a>
+    </section>
+
+    <div class="love-marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>生日快乐</span><i>✦</i><span>岁岁平安</span><i>♥</i><span>常欢喜</span><i>✦</i>
+        <span>万事胜意</span><i>♥</i><span>永远被爱</span><i>✦</i>
+        <span>生日快乐</span><i>♥</i><span>岁岁平安</span><i>✦</i><span>常欢喜</span><i>♥</i>
+        <span>万事胜意</span><i>✦</i><span>永远被爱</span><i>♥</i>
+      </div>
+    </div>
+
+    <section class="intro section-pad" id="intro">
+      <div class="section-side-label reveal">
+        <span>01</span>
+        <i></i>
+        <em>ABOUT HER</em>
+      </div>
+      <div class="intro-content">
+        <p class="section-kicker reveal">今天的女主角</p>
+        <h2 class="big-quote reveal">
+          她认真生活的样子，<br>
+          本身就是<span class="scribble">最动人的风景</span>。
+        </h2>
+        <div class="intro-lower reveal" data-delay="100">
+          <p class="intro-paragraph" id="introText">
+            她可以明媚，也可以安静；可以勇敢，也可以偶尔脆弱。她不需要成为某一种标准答案，只要是真实的自己，就已经足够闪闪发光。
+          </p>
+          <div class="signature-block">
+            <span class="signature-line"></span>
+            <p>想为她收藏所有发光的瞬间</p>
+            <small id="birthdayNote">11.22 · 她的专属日子</small>
+          </div>
+        </div>
+      </div>
+      <div class="intro-doodle reveal" aria-hidden="true">
+        <svg viewBox="0 0 160 150" fill="none">
+          <path d="M32 25C49 39 55 60 48 78C41 96 24 103 18 122" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M48 77C70 65 88 75 87 91C86 105 66 107 62 95C57 81 77 71 99 82C111 89 114 104 110 119" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M114 62L128 53M122 77L140 74M109 92L126 98" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M41 35C46 29 52 27 58 29M35 45C29 43 25 46 23 51" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <span>all about her</span>
+      </div>
+    </section>
+
+    <section class="story section-pad" id="story">
+      <div class="section-heading reveal">
+        <div>
+          <p class="section-kicker">02 · ALL ABOUT HER</p>
+          <h2>关于她的每一面，<br>都想好好收藏。</h2>
+        </div>
+        <p class="section-heading-note">
+          她不必完美，<br>
+          她只需要是她自己。
+        </p>
+      </div>
+
+      <div class="timeline">
+        <article class="story-item reveal">
+          <div class="story-number">01</div>
+          <figure class="story-photo tilt-left" data-image-slot="story1">
+            <img id="storyImage1" src="assets/story-placeholder-1.svg" alt="她笑起来的样子">
+            <span class="image-hint">点击查看大图</span>
+            <span class="photo-index">HER BRIGHTEST SMILE</span>
+          </figure>
+          <div class="story-copy">
+            <p class="story-date" id="storyDate1">镜头之外 · 她笑起来的样子</p>
+            <h3 id="storyTitle1">她一笑，周围就亮了</h3>
+            <p id="storyText1">
+              她笑起来的时候，眼睛会弯成小小的月牙。那种发自内心的快乐，比任何滤镜都好看。
+            </p>
+            <span class="story-tag" id="storyTag1"># 今天也被她可爱到</span>
+          </div>
+        </article>
+
+        <article class="story-item story-item-reverse reveal">
+          <div class="story-number">02</div>
+          <figure class="story-photo tilt-right" data-image-slot="story2">
+            <img id="storyImage2" src="assets/story-placeholder-2.svg" alt="她认真生活的样子">
+            <span class="image-hint">点击查看大图</span>
+            <span class="photo-index">SHINING IN HER OWN WAY</span>
+          </figure>
+          <div class="story-copy">
+            <p class="story-date" id="storyDate2">江边散步 · 好天气</p>
+            <h3 id="storyTitle2">风很轻，她在发光</h3>
+            <p id="storyText2">
+              草坪、江风和远处的城市都刚刚好。她抬手比了个“耶”，随手一拍，就把最鲜活可爱的她留在了镜头里。
+            </p>
+            <span class="story-tag" id="storyTag2"># 她比风景更上镜</span>
+          </div>
+        </article>
+
+        <article class="story-item reveal">
+          <div class="story-number">03</div>
+          <figure class="story-photo tilt-left" data-image-slot="story3">
+            <img id="storyImage3" src="assets/story-placeholder-3.svg" alt="她安静美好的样子">
+            <span class="image-hint">点击查看大图</span>
+            <span class="photo-index">HER LITTLE ROMANCE</span>
+          </figure>
+          <div class="story-copy">
+            <p class="story-date" id="storyDate3">平常日子 · 藏着小浪漫</p>
+            <h3 id="storyTitle3">她值得世间所有偏爱</h3>
+            <p id="storyText3">
+              她会在小事里发现浪漫，也总能温柔地照顾身边的人。愿她被爱包围，也永远拥有自由和快乐。
+            </p>
+            <span class="story-tag" id="storyTag3"># 永远做她自己</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="interlude">
+      <div class="interlude-bg" aria-hidden="true">LOVE</div>
+      <div class="interlude-content reveal">
+        <span class="interlude-heart">♡</span>
+        <blockquote>
+          “ 她不需要成为谁，<br>
+          她站在那里，<br>
+          就已经很美好。 ”
+        </blockquote>
+        <p>愿她被爱包围，也始终自由。</p>
+      </div>
+      <div class="pressed-flowers" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </section>
+
+    <section class="gallery section-pad" id="gallery">
+      <div class="section-heading reveal">
+        <div>
+          <p class="section-kicker">03 · HER PHOTO DIARY</p>
+          <h2>把这些喜欢的她，<br>一页一页收藏。</h2>
+        </div>
+          <p class="section-heading-note gallery-click-note">
+          <i aria-hidden="true">↗</i>
+          点击任意照片，<br>
+          查看清晰大图。
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="gallery-item gallery-main reveal" data-image-slot="gallery1">
+          <img id="galleryImage1" src="assets/gallery-placeholder-1.svg" alt="她的照片">
+          <span class="image-hint">点击查看大图</span>
+          <figcaption>
+            <span>01</span>
+            <p id="galleryCaption1">今天也是漂亮的她</p>
+          </figcaption>
+        </figure>
+        <figure class="gallery-item gallery-tall reveal" data-image-slot="gallery2" data-delay="80">
+          <img id="galleryImage2" src="assets/gallery-placeholder-2.svg" alt="她的照片">
+          <span class="image-hint">点击查看大图</span>
+          <figcaption>
+            <span>02</span>
+            <p id="galleryCaption2">镜头里最生动的她</p>
+          </figcaption>
+        </figure>
+        <figure class="gallery-item gallery-wide reveal" data-image-slot="gallery3" data-delay="120">
+          <img id="galleryImage3" src="assets/gallery-placeholder-3.svg" alt="她的照片">
+          <span class="image-hint">点击查看大图</span>
+          <figcaption>
+            <span>03</span>
+            <p id="galleryCaption3">路过人间的小小闪光</p>
+          </figcaption>
+        </figure>
+        <figure class="gallery-item reveal" data-image-slot="gallery4" data-delay="80">
+          <img id="galleryImage4" src="assets/gallery-placeholder-4.svg" alt="她的照片">
+          <span class="image-hint">点击查看大图</span>
+          <figcaption>
+            <span>04</span>
+            <p id="galleryCaption4">认真生活的样子</p>
+          </figcaption>
+        </figure>
+        <figure class="gallery-item reveal" data-image-slot="gallery5" data-delay="140">
+          <img id="galleryImage5" src="assets/gallery-placeholder-5.svg" alt="她的照片">
+          <span class="image-hint">点击查看大图</span>
+          <figcaption>
+            <span>05</span>
+            <p id="galleryCaption5">笑起来会有好天气</p>
+          </figcaption>
+        </figure>
+        <figure class="gallery-item gallery-tall reveal" data-image-slot="gallery6" data-delay="180">
+          <img id="galleryImage6" src="assets/gallery-placeholder-6.svg" alt="她的照片">
+          <span class="image-hint">点击查看大图</span>
+          <figcaption>
+            <span>06</span>
+            <p id="galleryCaption6">下一站也要闪闪发光</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="gallery-quote reveal">
+        <span class="quote-mark">“</span>
+        <p id="galleryQuote">她不是某一种标准答案，她就是独一无二的风景。</p>
+        <span class="quote-mark closing">”</span>
+      </div>
+    </section>
+
+    <section class="birthday-wish section-pad" id="wish">
+      <div class="cake-scene reveal">
+        <p class="section-kicker">04 · MAKE A WISH</p>
+        <h2>今天，世界为你庆祝。</h2>
+        <p class="cake-tip" id="cakeTip">闭上眼睛，许个愿吧</p>
+        <button class="cake-button" id="cakeButton" type="button" aria-label="点击吹灭蜡烛">
+          <span class="cake-shadow" aria-hidden="true"></span>
+          <span class="cake-stand" aria-hidden="true"></span>
+          <span class="cake-body" aria-hidden="true">
+            <i class="icing-drop drop-one"></i>
+            <i class="icing-drop drop-two"></i>
+            <i class="icing-drop drop-three"></i>
+            <i class="cake-heart">♥</i>
+          </span>
+          <span class="cake-top" aria-hidden="true"></span>
+          <span class="candle" aria-hidden="true">
+            <i class="flame"></i>
+          </span>
+          <span class="cake-glitter glitter-one">✦</span>
+          <span class="cake-glitter glitter-two">✧</span>
+          <span class="cake-glitter glitter-three">✦</span>
+        </button>
+        <button class="wish-replay" id="wishReplay" type="button">再许一次愿</button>
+      </div>
+
+      <div class="wish-content">
+        <p class="section-kicker reveal">写给未来的你</p>
+        <h2 class="reveal">我的生日愿望，<br>全部和她有关。</h2>
+        <div class="wish-cards">
+          <article class="wish-card reveal">
+            <span class="wish-card-number">01</span>
+            <div class="wish-icon" aria-hidden="true">☼</div>
+            <h3 id="wishTitle1">愿你健康，也快乐</h3>
+            <p id="wishText1">愿你每天都能睡个好觉，醒来时心情晴朗，有精力去爱、去生活、去做所有喜欢的事。</p>
+          </article>
+          <article class="wish-card reveal" data-delay="80">
+            <span class="wish-card-number">02</span>
+            <div class="wish-icon" aria-hidden="true">✧</div>
+            <h3 id="wishTitle2">愿你所求皆如愿</h3>
+            <p id="wishText2">愿你想去的地方都能抵达，想做的事情都有回应，在每一个选择面前，都有向前走的勇气。</p>
+          </article>
+          <article class="wish-card reveal" data-delay="160">
+            <span class="wish-card-number">03</span>
+            <div class="wish-icon" aria-hidden="true">♡</div>
+            <h3 id="wishTitle3">愿你被岁月温柔</h3>
+            <p id="wishText3">愿往后的每个生日都有人认真庆祝，愿她一直自由、明亮，把喜欢的生活过成最浪漫的长篇。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="letter-section section-pad" id="letter">
+      <div class="section-side-label reveal">
+        <span>05</span>
+        <i></i>
+        <em>A LETTER FOR HER</em>
+      </div>
+      <div class="letter-intro reveal">
+        <p class="section-kicker">一封藏在网页里的信</p>
+        <h2>有些祝福，<br>想在今天认真告诉她。</h2>
+        <p>点击信封，拆开今天最郑重的一份心意。</p>
+      </div>
+
+      <div class="envelope-stage reveal" id="envelopeStage">
+        <button class="envelope" id="envelopeButton" type="button" aria-label="打开写给你的信" aria-expanded="false">
+          <span class="envelope-back"></span>
+          <span class="letter-paper">
+            <span class="letter-paper-head">To my favorite girl,</span>
+            <span class="letter-paper-text" id="letterPreview">见字如面。今天想认真地告诉你：遇见你，是我平淡日子里最幸运的意外……</span>
+            <span class="letter-paper-sign" id="letterPreviewSign">永远爱你的人</span>
+          </span>
+          <span class="envelope-front"></span>
+          <span class="envelope-flap"></span>
+          <span class="wax-seal">♥</span>
+          <span class="envelope-hint">CLICK TO OPEN</span>
+        </button>
+      </div>
+
+      <article class="full-letter" id="fullLetter" aria-hidden="true">
+        <button class="letter-close" id="letterClose" type="button" aria-label="收起信纸">×</button>
+        <div class="letter-heading">
+          <span class="letter-stamp">LOVE<br>LETTER</span>
+          <p id="letterSalutation">给我最亲爱的你：</p>
+          <h2>生日快乐。</h2>
+        </div>
+        <div class="letter-body" id="letterBody">
+          <p>见字如面。</p>
+          <p>今天想把所有最真诚的祝福都送给你。你认真生活、温柔待人的样子，一直都很耀眼，只是希望你也能看见自己的光。</p>
+          <p>喜欢看你分享那些不值一提的小事，也喜欢你谈起热爱时眼睛发亮的样子。希望新的一岁，你能更常常为自己开心。</p>
+          <p>新的一岁，愿你有数不清的快乐，也有足够的底气面对所有未知。愿你永远自在、明亮，做最真实的自己。</p>
+          <p>愿你想去的地方都能抵达，想做的事都有回应；愿世界对你温柔，也愿你始终拥有爱自己的勇气。</p>
+          <p>生日快乐，我的女孩。</p>
+        </div>
+        <p class="letter-signature" id="letterSignature">永远爱你的人<br><span id="letterDate">2026.11.22</span></p>
+        <span class="letter-pressed-flower" aria-hidden="true">✿</span>
+      </article>
+    </section>
+
+    <section class="finale">
+      <div class="finale-stars" id="finaleStars" aria-hidden="true"></div>
+      <div class="finale-content reveal">
+        <span class="finale-kicker">AND MANY MORE TO COME</span>
+        <h2>生日快乐，<br><em id="finaleName">我的女孩</em>。</h2>
+        <p>每一张照片，每一次笑容，<br>还有未来闪闪发光的很多年，都值得被好好收藏。</p>
+        <button class="finale-heart" id="finaleHeart" type="button" aria-label="送一个心">
+          <span>♥</span>
+          <small>点一下</small>
+        </button>
+      </div>
+      <div class="finale-footer">
+        <span>Made with all my love</span>
+        <span id="footerNames">FOR HER · ALWAYS</span>
+      </div>
+    </section>
+  </main>
+
+  <nav class="mobile-dock" aria-label="手机端导航">
+    <a href="#story"><span>01</span>关于她</a>
+    <a href="#gallery"><span>02</span>照片日记</a>
+    <a href="#wish"><span>03</span>生日愿望</a>
+    <a href="#letter"><span>04</span>写给她</a>
+  </nav>
+
+  <aside class="editor-drawer" id="editorDrawer" aria-hidden="true" aria-label="编辑网站内容" hidden>
+    <div class="editor-header">
+      <div>
+        <span class="editor-eyebrow">ALL ABOUT HER</span>
+        <h2>把这里变成她的生日宇宙</h2>
+        <p>修改后点击保存，所有内容只保存在当前浏览器。</p>
+      </div>
+      <button class="editor-close" id="editorClose" type="button" aria-label="关闭编辑器">×</button>
+    </div>
+    <div class="editor-tabs" role="tablist">
+      <button class="editor-tab active" type="button" role="tab" aria-selected="true" data-tab="basic">她的信息</button>
+      <button class="editor-tab" type="button" role="tab" aria-selected="false" data-tab="story">她的照片</button>
+      <button class="editor-tab" type="button" role="tab" aria-selected="false" data-tab="letter">生日信</button>
+    </div>
+
+    <form class="editor-form" id="editorForm">
+      <div class="editor-panel active" data-panel="basic">
+        <label class="field">
+          <span>她的名字 / 昵称</span>
+          <input type="text" name="herName" maxlength="20" placeholder="例如：小满">
+        </label>
+        <label class="field">
+          <span>你的名字 / 署名</span>
+          <input type="text" name="yourName" maxlength="20" placeholder="例如：阿信">
+        </label>
+        <label class="field">
+          <span>她的生日</span>
+          <input type="date" name="birthday">
+        </label>
+        <label class="field">
+          <span>首页副标题</span>
+          <textarea name="heroSubtitle" rows="3" maxlength="80"></textarea>
+        </label>
+        <label class="field">
+          <span>首页照片说明</span>
+          <input type="text" name="heroCaption" maxlength="40">
+        </label>
+        <label class="field">
+          <span>首页小纸条</span>
+          <textarea name="heroNote" rows="2" maxlength="60"></textarea>
+        </label>
+        <label class="field">
+          <span>关于她的一段话</span>
+          <textarea name="introText" rows="4" maxlength="220"></textarea>
+        </label>
+        <label class="field">
+          <span>照片日记下方的话</span>
+          <input type="text" name="galleryQuote" maxlength="80">
+        </label>
+      </div>
+
+      <div class="editor-panel" data-panel="story">
+        <div class="image-editor-list">
+          <button class="image-editor-item" type="button" data-pick-image="hero">
+            <img src="assets/hero-placeholder.svg" alt="" data-preview-for="hero">
+            <span><b>首页主照片</b><small>点击上传</small></span>
+          </button>
+          <button class="image-editor-item" type="button" data-pick-image="story1">
+            <img src="assets/story-placeholder-1.svg" alt="" data-preview-for="story1">
+            <span><b>她的照片 01</b><small>点击上传</small></span>
+          </button>
+          <button class="image-editor-item" type="button" data-pick-image="story2">
+            <img src="assets/story-placeholder-2.svg" alt="" data-preview-for="story2">
+            <span><b>她的照片 02</b><small>点击上传</small></span>
+          </button>
+          <button class="image-editor-item" type="button" data-pick-image="story3">
+            <img src="assets/story-placeholder-3.svg" alt="" data-preview-for="story3">
+            <span><b>她的照片 03</b><small>点击上传</small></span>
+          </button>
+          <button class="image-editor-item" type="button" data-pick-image="gallery1">
+            <img src="assets/gallery-placeholder-1.svg" alt="" data-preview-for="gallery1">
+            <span><b>照片日记 01</b><small>点击上传</small></span>
+          </button>
+          <button class="image-editor-item" type="button" data-pick-image="gallery2">
+            <img src="assets/gallery-placeholder-2.svg" alt="" data-preview-for="gallery2">
+            <span><b>照片日记 02</b><small>点击上传</small></span>
+          </button>
+          <button class="image-editor-item" type="button" data-pick-image="gallery3">
+            <img src="assets/gallery-placeholder-3.svg" alt="" data-preview-for="gallery3">
+            <span><b>照片日记 03</b><small>点击上传</small></span>
+          </button>
+          <button class="image-editor-item" type="button" data-pick-image="gallery4">
+            <img src="assets/gallery-placeholder-4.svg" alt="" data-preview-for="gallery4">
+            <span><b>照片日记 04</b><small>点击上传</small></span>
+          </button>
+          <button class="image-editor-item" type="button" data-pick-image="gallery5">
+            <img src="assets/gallery-placeholder-5.svg" alt="" data-preview-for="gallery5">
+            <span><b>照片日记 05</b><small>点击上传</small></span>
+          </button>
+          <button class="image-editor-item" type="button" data-pick-image="gallery6">
+            <img src="assets/gallery-placeholder-6.svg" alt="" data-preview-for="gallery6">
+            <span><b>照片日记 06</b><small>点击上传</small></span>
+          </button>
+        </div>
+
+        <div class="editor-subheading">
+          <span>照片日记文案</span>
+        </div>
+        <div class="story-fields">
+          <fieldset>
+            <legend>照片日记 01</legend>
+            <label class="field"><span>照片下方文案</span><input name="galleryCaption1" maxlength="40"></label>
+          </fieldset>
+          <fieldset>
+            <legend>照片日记 02</legend>
+            <label class="field"><span>照片下方文案</span><input name="galleryCaption2" maxlength="40"></label>
+          </fieldset>
+          <fieldset>
+            <legend>照片日记 03</legend>
+            <label class="field"><span>照片下方文案</span><input name="galleryCaption3" maxlength="40"></label>
+          </fieldset>
+          <fieldset>
+            <legend>照片日记 04</legend>
+            <label class="field"><span>照片下方文案</span><input name="galleryCaption4" maxlength="40"></label>
+          </fieldset>
+          <fieldset>
+            <legend>照片日记 05</legend>
+            <label class="field"><span>照片下方文案</span><input name="galleryCaption5" maxlength="40"></label>
+          </fieldset>
+          <fieldset>
+            <legend>照片日记 06</legend>
+            <label class="field"><span>照片下方文案</span><input name="galleryCaption6" maxlength="40"></label>
+          </fieldset>
+        </div>
+
+        <div class="editor-subheading">
+          <span>关于她的照片旁白</span>
+          <button type="button" class="text-link" id="fillStoryExample">填入示例</button>
+        </div>
+        <div class="story-fields">
+          <fieldset>
+            <legend>她的照片 01</legend>
+            <label class="field"><span>小标题</span><input name="storyDate1" maxlength="30"></label>
+            <label class="field"><span>标题</span><input name="storyTitle1" maxlength="40"></label>
+            <label class="field"><span>正文</span><textarea name="storyText1" rows="3" maxlength="160"></textarea></label>
+            <label class="field"><span>标签</span><input name="storyTag1" maxlength="30"></label>
+          </fieldset>
+          <fieldset>
+            <legend>她的照片 02</legend>
+            <label class="field"><span>小标题</span><input name="storyDate2" maxlength="30"></label>
+            <label class="field"><span>标题</span><input name="storyTitle2" maxlength="40"></label>
+            <label class="field"><span>正文</span><textarea name="storyText2" rows="3" maxlength="160"></textarea></label>
+            <label class="field"><span>标签</span><input name="storyTag2" maxlength="30"></label>
+          </fieldset>
+          <fieldset>
+            <legend>她的照片 03</legend>
+            <label class="field"><span>小标题</span><input name="storyDate3" maxlength="30"></label>
+            <label class="field"><span>标题</span><input name="storyTitle3" maxlength="40"></label>
+            <label class="field"><span>正文</span><textarea name="storyText3" rows="3" maxlength="160"></textarea></label>
+            <label class="field"><span>标签</span><input name="storyTag3" maxlength="30"></label>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="editor-panel" data-panel="letter">
+        <label class="field">
+          <span>信的称呼</span>
+          <input type="text" name="letterSalutation" maxlength="40">
+        </label>
+        <label class="field">
+          <span>信的主体（每一段换一行）</span>
+          <textarea name="letterBody" rows="14"></textarea>
+        </label>
+        <label class="field">
+          <span>署名</span>
+          <input type="text" name="letterSignature" maxlength="40">
+        </label>
+        <div class="editor-subheading"><span>生日愿望卡片</span></div>
+        <fieldset>
+          <legend>愿望 01</legend>
+          <label class="field"><span>标题</span><input name="wishTitle1" maxlength="30"></label>
+          <label class="field"><span>内容</span><textarea name="wishText1" rows="3" maxlength="120"></textarea></label>
+        </fieldset>
+        <fieldset>
+          <legend>愿望 02</legend>
+          <label class="field"><span>标题</span><input name="wishTitle2" maxlength="30"></label>
+          <label class="field"><span>内容</span><textarea name="wishText2" rows="3" maxlength="120"></textarea></label>
+        </fieldset>
+        <fieldset>
+          <legend>愿望 03</legend>
+          <label class="field"><span>标题</span><input name="wishTitle3" maxlength="30"></label>
+          <label class="field"><span>内容</span><textarea name="wishText3" rows="3" maxlength="120"></textarea></label>
+        </fieldset>
+      </div>
+    </form>
+
+    <div class="editor-footer">
+      <div class="editor-secondary-actions">
+        <button type="button" id="exportButton">导出备份</button>
+        <button type="button" id="importButton">导入备份</button>
+        <button type="button" id="resetButton">恢复示例</button>
+      </div>
+      <button class="save-button" id="saveButton" type="button">
+        保存她的生日网站
+        <span aria-hidden="true">♥</span>
+      </button>
+      <p class="privacy-note">照片不会上传到任何服务器，只会保存在这台设备的浏览器里。</p>
+    </div>
+  </aside>
+
+  <div class="editor-backdrop" id="editorBackdrop"></div>
+  <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+  <input type="file" id="importInput" accept="application/json,.json" hidden>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭预览">×</button>
+    <div class="lightbox-frame">
+      <img id="lightboxImage" src="" alt="照片预览">
+      <p id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <audio id="shortTrack" src="assets/birthday-short.wav" preload="auto"></audio>
+  <audio id="coralTrack" src="assets/coral-sea.ogg" preload="auto"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
