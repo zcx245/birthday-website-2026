@@ -175,8 +175,13 @@
 
   async function loadPublishedSiteData() {
     if (window.__SITE_DATA__ || !location.protocol.startsWith("http")) return false;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1000);
     try {
-      const response = await fetch("site-data.json", { cache: "no-store" });
+      const response = await fetch("site-data.json", {
+        cache: "no-store",
+        signal: controller.signal
+      });
       if (!response.ok) return false;
       const publishedData = await response.json();
       if (!publishedData || typeof publishedData !== "object") return false;
@@ -184,6 +189,8 @@
       return true;
     } catch {
       return false;
+    } finally {
+      clearTimeout(timeout);
     }
   }
 
