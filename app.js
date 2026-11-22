@@ -176,9 +176,9 @@
   async function loadPublishedSiteData() {
     if (window.__SITE_DATA__ || !location.protocol.startsWith("http")) return false;
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 1000);
+    const timeout = setTimeout(() => controller.abort(), 15000);
     try {
-      const response = await fetch("site-data.json", {
+      const response = await fetch("site-data.json?v=20261122-2", {
         cache: "no-store",
         signal: controller.signal
       });
@@ -192,6 +192,22 @@
     } finally {
       clearTimeout(timeout);
     }
+  }
+
+  function exportCurrentSiteData() {
+    const blob = new Blob([JSON.stringify(config)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "site-data.json";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    $("#loadingScreen").classList.add("loaded");
+    $("#musicGate").hidden = true;
+    document.body.classList.remove("intro-locked");
+    showToast("已导出 site-data.json，请把这个文件发给我上传");
   }
 
   function setText(id, value) {
@@ -642,6 +658,14 @@
     setTimeout(() => startButton.focus({ preventScroll: true }), 800);
   }
 
+  function setupSiteDataExportShortcut() {
+    document.addEventListener("keydown", (event) => {
+      if (!(event.ctrlKey && event.shiftKey) || event.key.toLowerCase() !== "e") return;
+      event.preventDefault();
+      exportCurrentSiteData();
+    });
+  }
+
   const confettiState = {
     particles: [],
     running: false,
@@ -939,28 +963,24 @@
     setupCursorGlow();
     setupMusicPlaylist();
     setupMusicGate();
+    setupSiteDataExportShortcut();
     createStarField($("#heroStarField"), 34);
     createStarField($("#finaleStars"), 44);
     syncToMobileServer();
     resizeConfettiCanvas();
     window.addEventListener("resize", resizeConfettiCanvas);
     $("#musicButton").addEventListener("click", toggleMusic);
-    let loadingRevealed = false;
-    const revealPage = () => {
-      if (loadingRevealed) return;
-      loadingRevealed = true;
-      $("#loadingScreen").classList.add("loaded");
-      $$(".hero .reveal").forEach((item) => item.classList.add("in-view"));
-    };
-    if (document.readyState === "complete") {
-      setTimeout(revealPage, 250);
-    } else {
-      document.addEventListener("DOMContentLoaded", () => setTimeout(revealPage, 250), { once: true });
-      setTimeout(revealPage, 1500);
-    }
+    $("#loadingScreen").classList.add("loaded");
+    $$(".hero .reveal").forEach((item) => item.classList.add("in-view"));
   }
 
   async function bootstrap() {
+    const exportRequested = new URLSearchParams(location.search).get("export-site-data") === "1";
+    if (exportRequested) {
+      config = loadConfig();
+      exportCurrentSiteData();
+      return;
+    }
     await loadPublishedSiteData();
     init();
   }
