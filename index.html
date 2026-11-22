@@ -7,8 +7,8 @@
   <meta name="description" content="一个只属于她的生日网站，收藏她闪闪发光的每一面。">
   <title>致亲爱的你 · 生日快乐</title>
   <link rel="preload" href="assets/photos-fast/hero.webp" as="image" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20261123-4">
-  <script src="app.js?v=20261123-speed-4" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261123-preload-1">
+  <script src="app.js?v=20261123-preload-1" defer></script>
 </head>
 <body class="intro-locked">
   <div class="grain" aria-hidden="true"></div>
@@ -35,11 +35,14 @@
       <p class="music-gate-kicker">BEFORE THE CELEBRATION</p>
       <h2 id="musicGateTitle">先为今天，<br>放一首歌。</h2>
       <p class="music-gate-copy">点击开启生日音乐<br>属于她的庆祝，从这一刻开始。</p>
-      <button class="music-start-button" id="musicStartButton" type="button">
+      <button class="music-start-button" id="musicStartButton" type="button" disabled aria-disabled="true">
         <span class="music-start-icon" aria-hidden="true">▶</span>
-        <span class="music-start-label">开启生日音乐</span>
+        <span class="music-start-label">正在加载照片和音乐 0%</span>
         <i class="music-start-wave" aria-hidden="true"><b></b><b></b><b></b><b></b></i>
       </button>
+      <div class="preload-meter" id="preloadMeter" aria-hidden="true">
+        <i id="preloadBar"></i>
+      </div>
       <span class="music-gate-note">生日语音 → 珊瑚海 · 循环播放</span>
     </div>
     <span class="music-gate-foot">A LITTLE SOUNDTRACK FOR HER SPECIAL DAY</span>
@@ -103,7 +106,7 @@
         <span class="orbit orbit-two" aria-hidden="true">♡</span>
         <figure class="portrait-card" data-image-slot="hero">
           <div class="portrait-inner">
-            <img id="heroImage" src="assets/photos-fast/hero.webp" alt="她的照片" width="600" height="800" loading="eager" decoding="async" fetchpriority="high">
+            <img id="heroImage" src="assets/photos-fast/hero.webp" data-fallback="assets/photos/hero.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她的照片" width="600" height="800" loading="eager" decoding="async" fetchpriority="high">
             <span class="image-hint">点击查看大图</span>
           </div>
           <figcaption>
@@ -190,7 +193,7 @@
         <article class="story-item reveal">
           <div class="story-number">01</div>
           <figure class="story-photo tilt-left" data-image-slot="story1">
-            <img id="storyImage1" data-lazy-photo data-src="assets/photos-fast/story1.webp" alt="她笑起来的样子" width="600" height="800" loading="lazy" decoding="async">
+            <img id="storyImage1" src="assets/photos-fast/story1.webp" data-fallback="assets/photos/story1.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她笑起来的样子" width="600" height="800" loading="lazy" decoding="async">
             <span class="image-hint">点击查看大图</span>
             <span class="photo-index">HER BRIGHTEST SMILE</span>
           </figure>
@@ -207,7 +210,7 @@
         <article class="story-item story-item-reverse reveal">
           <div class="story-number">02</div>
           <figure class="story-photo tilt-right" data-image-slot="story2">
-            <img id="storyImage2" data-lazy-photo data-src="assets/photos-fast/story2.webp" alt="她认真生活的样子" width="600" height="800" loading="lazy" decoding="async">
+            <img id="storyImage2" src="assets/photos-fast/story2.webp" data-fallback="assets/photos/story2.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她认真生活的样子" width="600" height="800" loading="lazy" decoding="async">
             <span class="image-hint">点击查看大图</span>
             <span class="photo-index">SHINING IN HER OWN WAY</span>
           </figure>
@@ -224,7 +227,7 @@
         <article class="story-item reveal">
           <div class="story-number">03</div>
           <figure class="story-photo tilt-left" data-image-slot="story3">
-            <img id="storyImage3" data-lazy-photo data-src="assets/photos-fast/story3.webp" alt="她安静美好的样子" width="600" height="800" loading="lazy" decoding="async">
+            <img id="storyImage3" src="assets/photos-fast/story3.webp" data-fallback="assets/photos/story3.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她安静美好的样子" width="600" height="800" loading="lazy" decoding="async">
             <span class="image-hint">点击查看大图</span>
             <span class="photo-index">HER LITTLE ROMANCE</span>
           </figure>
@@ -271,7 +274,7 @@
 
       <div class="gallery-grid">
         <figure class="gallery-item gallery-main reveal" data-image-slot="gallery1">
-          <img id="galleryImage1" data-lazy-photo data-src="assets/photos-fast/gallery1.webp" alt="她的照片" width="370" height="800" loading="lazy" decoding="async">
+          <img id="galleryImage1" src="assets/photos-fast/gallery1.webp" data-fallback="assets/photos/gallery1.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她的照片" width="370" height="800" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>01</span>
@@ -279,7 +282,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item gallery-tall reveal" data-image-slot="gallery2" data-delay="80">
-          <img id="galleryImage2" data-lazy-photo data-src="assets/photos-fast/gallery2.webp" alt="她的照片" width="600" height="800" loading="lazy" decoding="async">
+          <img id="galleryImage2" src="assets/photos-fast/gallery2.webp" data-fallback="assets/photos/gallery2.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她的照片" width="600" height="800" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>02</span>
@@ -287,7 +290,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item gallery-wide reveal" data-image-slot="gallery3" data-delay="120">
-          <img id="galleryImage3" data-lazy-photo data-src="assets/photos-fast/gallery3.webp" alt="她的照片" width="600" height="800" loading="lazy" decoding="async">
+          <img id="galleryImage3" src="assets/photos-fast/gallery3.webp" data-fallback="assets/photos/gallery3.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她的照片" width="600" height="800" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>03</span>
@@ -295,7 +298,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item reveal" data-image-slot="gallery4" data-delay="80">
-          <img id="galleryImage4" data-lazy-photo data-src="assets/photos-fast/gallery4.webp" alt="她的照片" width="600" height="800" loading="lazy" decoding="async">
+          <img id="galleryImage4" src="assets/photos-fast/gallery4.webp" data-fallback="assets/photos/gallery4.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她的照片" width="600" height="800" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>04</span>
@@ -303,7 +306,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item reveal" data-image-slot="gallery5" data-delay="140">
-          <img id="galleryImage5" data-lazy-photo data-src="assets/photos-fast/gallery5.webp" alt="她的照片" width="600" height="750" loading="lazy" decoding="async">
+          <img id="galleryImage5" src="assets/photos-fast/gallery5.webp" data-fallback="assets/photos/gallery5.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她的照片" width="600" height="750" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>05</span>
@@ -311,7 +314,7 @@
           </figcaption>
         </figure>
         <figure class="gallery-item gallery-tall reveal" data-image-slot="gallery6" data-delay="180">
-          <img id="galleryImage6" data-lazy-photo data-src="assets/photos-fast/gallery6.webp" alt="她的照片" width="600" height="800" loading="lazy" decoding="async">
+          <img id="galleryImage6" src="assets/photos-fast/gallery6.webp" data-fallback="assets/photos/gallery6.jpg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="她的照片" width="600" height="800" loading="lazy" decoding="async">
           <span class="image-hint">点击查看大图</span>
           <figcaption>
             <span>06</span>

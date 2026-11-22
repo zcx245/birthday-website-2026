@@ -101,7 +101,11 @@
     shortTrack: "assets/birthday-short.mp3",
     coralTrack: "assets/coral-sea.mp3?v=64k"
   };
-  let musicWarmupStarted = false;
+  const preloadState = {
+    running: false,
+    ready: false,
+    progress: 0
+  };
   let heartClickCount = 0;
   let loveEggTimer = null;
 
@@ -226,12 +230,7 @@
   function applyImages() {
     Object.entries(IMAGE_ELEMENTS).forEach(([key, id]) => {
       const image = document.getElementById(id);
-      if (!image) return;
-      if (image.hasAttribute("data-lazy-photo")) {
-        image.dataset.src = config.images[key];
-        return;
-      }
-      image.src = config.images[key];
+      if (image) image.src = config.images[key];
     });
     $$("[data-preview-for]").forEach((image) => {
       const key = image.dataset.previewFor;
@@ -605,34 +604,30 @@
     button.setAttribute("aria-label", playing ? "暂停背景音乐" : "播放背景音乐");
   }
 
-  async function downloadMusicBlob(source, slow = false) {
+  async function downloadMusicBlob(source, onProgress) {
     const response = await fetch(source, { cache: "force-cache" });
     if (!response.ok) throw new Error(`Music download failed: ${source}`);
-    if (!slow || !response.body || typeof response.body.getReader !== "function") {
-      return response.blob();
-    }
-
+    if (!response.body || typeof response.body.getReader !== "function") return response.blob();
     const reader = response.body.getReader();
     const chunks = [];
-    let chunkCount = 0;
+    const total = Number(response.headers.get("content-length")) || 0;
+    let received = 0;
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
       chunks.push(value);
-      chunkCount += 1;
-      if (chunkCount % 2 === 0) {
-        await new Promise((resolve) => setTimeout(resolve, 45));
-      }
+      received += value.byteLength;
+      if (total && onProgress) onProgress(Math.min(received / total, 1));
     }
     return new Blob(chunks, { type: "audio/mpeg" });
   }
 
-  function ensureTrackReady(trackId, slow = false) {
+  function ensureTrackReady(trackId, onProgress = null) {
     if (musicTrackPromises.has(trackId)) return musicTrackPromises.get(trackId);
     const source = MUSIC_TRACKS[trackId];
     if (!source) return Promise.resolve(false);
 
-    const promise = downloadMusicBlob(source, slow).then((blob) => {
+    const promise = downloadMusicBlob(source, onProgress).then((blob) => {
       const element = document.getElementById(trackId);
       if (!element) return false;
       element.src = URL.createObjectURL(blob);
@@ -647,18 +642,102 @@
     return promise;
   }
 
-  function warmMusicLibrary() {
-    if (musicWarmupStarted) return;
-    musicWarmupStarted = true;
-    ensureTrackReady("shortTrack");
-    const startCoral = () => {
-      setTimeout(() => ensureTrackReady("coralTrack", true), 450);
-    };
-    if (document.readyState === "complete") {
-      startCoral();
+  function updatePreloadProgress(progress, message = "正在加载照片和音乐") {
+    preloadState.progress = Math.max(preloadState.progress, Math.min(progress, 100));
+    const percent = Math.round(preloadState.progress);
+    const label = $(".music-start-label");
+    const bar = $("#preloadBar");
+    if (label) label.textContent = `${message} ${percent}%`;
+    if (bar) bar.style.width = `${percent}%`;
+  }
+
+  function waitForImage(image, timeout = 18000) {
+    return new Promise((resolve) => {
+      if (!image) return resolve(false);
+      image.loading = "eager";
+      let settled = false;
+      const finish = (ok = true) => {
+        if (settled) return;
+        settled = true;
+        resolve(ok && image.naturalWidth > 0);
+      };
+      const timer = setTimeout(() => finish(false), timeout);
+      const done = () => {
+        clearTimeout(timer);
+        finish(true);
+      };
+      image.addEventListener("load", done, { once: true });
+      image.addEventListener("error", () => {
+        const fallback = image.dataset.fallback;
+        if (fallback && image.getAttribute("src") !== fallback) {
+          image.src = fallback;
+          return;
+        }
+        clearTimeout(timer);
+        finish(false);
+      });
+      if (image.complete) {
+        clearTimeout(timer);
+        finish(image.naturalWidth > 0);
+      }
+    });
+  }
+
+  async function preloadExperience() {
+    if (preloadState.running || preloadState.ready) return preloadState.ready;
+    preloadState.running = true;
+    preloadState.progress = 0;
+    const startButton = $("#musicStartButton");
+    const meter = $("#preloadMeter");
+    const gateNote = $(".music-gate-note");
+    startButton.disabled = true;
+    startButton.setAttribute("aria-disabled", "true");
+    meter.classList.remove("ready");
+    gateNote.textContent = "正在准备全部照片与音乐";
+    updatePreloadProgress(0);
+
+    let imageLoaded = 0;
+    const imageJobs = Object.values(IMAGE_ELEMENTS).map((id) =>
+      waitForImage(document.getElementById(id)).then((ready) => {
+        imageLoaded += ready ? 1 : 0;
+        updatePreloadProgress((imageLoaded / Object.keys(IMAGE_ELEMENTS).length) * 55);
+        return ready;
+      })
+    );
+    const shortJob = ensureTrackReady("shortTrack").then((ready) => {
+      updatePreloadProgress(64);
+      return ready;
+    });
+    const coralJob = ensureTrackReady("coralTrack", (fraction) => {
+      updatePreloadProgress(64 + fraction * 35);
+    }).then((ready) => {
+      updatePreloadProgress(99);
+      return ready;
+    });
+
+    const results = await Promise.allSettled([...imageJobs, shortJob, coralJob]);
+    const allReady = results.every((result) =>
+      result.status === "fulfilled" && result.value === true
+    );
+    preloadState.running = false;
+
+    if (allReady) {
+      preloadState.ready = true;
+      updatePreloadProgress(100, "加载完成");
+      meter.classList.add("ready");
+      startButton.disabled = false;
+      startButton.setAttribute("aria-disabled", "false");
+      startButton.querySelector(".music-start-label").textContent = "开启生日音乐";
+      gateNote.textContent = "全部照片与音乐已准备好 · 点击进入";
+      showToast("照片和音乐已经全部准备好");
+      startButton.focus({ preventScroll: true });
     } else {
-      window.addEventListener("load", startCoral, { once: true });
+      startButton.disabled = false;
+      startButton.setAttribute("aria-disabled", "false");
+      startButton.querySelector(".music-start-label").textContent = "重新加载照片和音乐";
+      gateNote.textContent = "网络有点不稳定，点击这里重试";
     }
+    return allReady;
   }
 
   async function playMusicTrack(trackId, restart = false) {
@@ -724,20 +803,23 @@
     const startButton = $("#musicStartButton");
     const startLabel = $(".music-start-label");
     startButton.addEventListener("click", async () => {
+      if (!preloadState.ready) {
+        await preloadExperience();
+        return;
+      }
       startButton.disabled = true;
-      startLabel.textContent = "正在准备生日语音…";
-      await ensureTrackReady("shortTrack");
-      startLabel.textContent = "开启生日音乐";
+      startLabel.textContent = "正在开启生日音乐…";
       if (!musicIsPlaying) await toggleMusic();
       if (!musicIsPlaying) {
         startButton.disabled = false;
+        startLabel.textContent = "开启生日音乐";
         return;
       }
       gate.classList.add("opened");
       gate.setAttribute("aria-hidden", "true");
       document.body.classList.remove("intro-locked");
     });
-    setTimeout(() => startButton.focus({ preventScroll: true }), 800);
+    preloadExperience();
   }
 
   function setupSiteDataExportShortcut() {
@@ -973,31 +1055,6 @@
     });
   }
 
-  function setupPhotoLazyLoading() {
-    const images = $$("img[data-lazy-photo]");
-    const loadImage = (image) => {
-      const source = image.dataset.src;
-      if (!source) return;
-      image.src = source;
-      image.removeAttribute("data-src");
-      image.removeAttribute("data-lazy-photo");
-    };
-
-    if (!("IntersectionObserver" in window)) {
-      images.forEach(loadImage);
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        loadImage(entry.target);
-        observer.unobserve(entry.target);
-      });
-    }, { rootMargin: "180px 0px", threshold: 0.01 });
-    images.forEach((image) => observer.observe(image));
-  }
-
   function setupEditor() {
     const editorFab = $("#editorFab");
     const quickEditButton = $("#quickEditButton");
@@ -1116,7 +1173,6 @@
   function init() {
     applyConfig();
     fillEditor();
-    setupPhotoLazyLoading();
     setupImageInteractions();
     setupEditor();
     setupLetter();
@@ -1127,7 +1183,6 @@
     setupCursorGlow();
     setupMusicPlaylist();
     setupMusicGate();
-    warmMusicLibrary();
     setupSiteDataExportShortcut();
     createStarField($("#heroStarField"), 34);
     createStarField($("#finaleStars"), 44);

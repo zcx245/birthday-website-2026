@@ -349,6 +349,32 @@ img {
   transform: translateY(-3px);
 }
 
+.music-start-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+}
+
+.preload-meter {
+  width: min(238px, 72vw);
+  height: 2px;
+  margin-top: 13px;
+  overflow: hidden;
+  background: rgba(239, 249, 246, 0.16);
+}
+
+.preload-meter i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--coral), var(--rose-light));
+  transition: width 0.25s ease;
+}
+
+.preload-meter.ready i {
+  background: var(--sea-glass);
+}
+
 .music-start-icon {
   font-size: 9px;
   transform: translateX(1px);
