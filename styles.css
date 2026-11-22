@@ -1551,6 +1551,28 @@ img {
   overflow: hidden;
 }
 
+.gallery-item::before {
+  content: "＋  点击查看大图";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 4;
+  padding: 9px 12px;
+  border: 1px solid rgba(237, 247, 243, 0.32);
+  color: var(--foam);
+  background: rgba(8, 35, 47, 0.72);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  backdrop-filter: blur(9px);
+  transition: background 0.3s, transform 0.3s var(--ease);
+}
+
+.gallery-item:hover::before {
+  background: rgba(201, 118, 111, 0.9);
+  transform: translateY(-2px);
+}
+
 .gallery-item:hover img {
   filter: brightness(0.92);
   transform: scale(1.04);
@@ -3055,6 +3077,13 @@ img {
   .gallery-item figcaption {
     opacity: 1;
     transform: none;
+  }
+
+  .gallery-item::before {
+    top: 12px;
+    right: 12px;
+    padding: 8px 10px;
+    font-size: 9px;
   }
 
   .mobile-dock {
