@@ -35,7 +35,7 @@
       <p class="music-gate-copy">点击开启生日音乐<br>属于她的庆祝，从这一刻开始。</p>
       <button class="music-start-button" id="musicStartButton" type="button">
         <span class="music-start-icon" aria-hidden="true">▶</span>
-        <span>开启生日音乐</span>
+        <span class="music-start-label">开启生日音乐</span>
         <i class="music-start-wave" aria-hidden="true"><b></b><b></b><b></b><b></b></i>
       </button>
       <span class="music-gate-note">生日语音 → 珊瑚海 · 循环播放</span>
@@ -330,6 +330,10 @@
         <p class="section-kicker">04 · MAKE A WISH</p>
         <h2>今天，世界为你庆祝。</h2>
         <p class="cake-tip" id="cakeTip">闭上眼睛，许个愿吧</p>
+        <div class="candle-action-hint" id="candleActionHint">
+          <span aria-hidden="true">↖</span>
+          <b>点击蜡烛吹灭</b>
+        </div>
         <button class="cake-button" id="cakeButton" type="button" aria-label="点击吹灭蜡烛">
           <span class="cake-shadow" aria-hidden="true"></span>
           <span class="cake-stand" aria-hidden="true"></span>
@@ -440,6 +444,18 @@
       </div>
     </section>
   </main>
+
+  <div class="love-easter-egg" id="loveEasterEgg" aria-hidden="true">
+    <button class="love-egg-close" id="loveEggClose" type="button" aria-label="关闭彩蛋">×</button>
+    <div class="love-egg-aura" aria-hidden="true"></div>
+    <div class="love-egg-hearts" id="loveEggHearts" aria-hidden="true"></div>
+    <div class="love-egg-content">
+      <span class="love-egg-kicker">A LITTLE SECRET FOR YOU</span>
+      <strong>我爱你</strong>
+      <p>不是今天才爱你，<br>是多一天，就更爱你一点。</p>
+      <small>点击任意处收下这份心意</small>
+    </div>
+  </div>
 
   <nav class="mobile-dock" aria-label="手机端导航">
     <a href="#story"><span>01</span>关于她</a>
@@ -663,8 +679,8 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
 
-  <audio id="shortTrack" src="assets/birthday-short.mp3" preload="metadata"></audio>
-  <audio id="coralTrack" src="assets/coral-sea.mp3" preload="metadata"></audio>
+  <audio id="shortTrack" src="assets/birthday-short.mp3" preload="none"></audio>
+  <audio id="coralTrack" src="assets/coral-sea.mp3" preload="none"></audio>
 
   <script src="app.js?v=20261123-final"></script>
 </body>

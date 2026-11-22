@@ -49,6 +49,7 @@ body {
 body.editor-open,
 body.lightbox-open,
 body.letter-open,
+body.love-egg-open,
 body.intro-locked {
   overflow: hidden;
 }
@@ -1705,6 +1706,41 @@ img {
   letter-spacing: 0.08em;
 }
 
+.candle-action-hint {
+  position: absolute;
+  top: 126px;
+  right: -8px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid rgba(47, 101, 115, 0.16);
+  color: var(--wine);
+  background: rgba(249, 252, 251, 0.76);
+  box-shadow: 0 10px 30px rgba(20, 59, 70, 0.08);
+  font-family: var(--serif);
+  font-size: 10px;
+  white-space: nowrap;
+  transform: rotate(-3deg);
+  animation: candleHintFloat 2.2s ease-in-out infinite;
+  backdrop-filter: blur(8px);
+}
+
+.candle-action-hint span {
+  color: var(--coral);
+  font-size: 16px;
+}
+
+.candle-action-hint b {
+  font-weight: 400;
+}
+
+.candle-action-hint.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .cake-button {
   position: relative;
   display: block;
@@ -2346,14 +2382,19 @@ img {
   border-radius: 50%;
   color: var(--rose-light);
   background: transparent;
+  box-shadow: 0 0 calc(var(--heart-charge, 0) * 28px) rgba(237, 185, 173, 0.32);
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 .finale-heart:hover {
   color: var(--wine);
   background: var(--rose-light);
   transform: scale(1.08);
+}
+
+.finale-heart.charged {
+  animation: heartCharge 0.38s var(--ease);
 }
 
 .finale-heart span {
@@ -2381,6 +2422,139 @@ img {
   font-family: var(--english);
   font-size: 8px;
   letter-spacing: 0.14em;
+}
+
+.love-easter-egg {
+  position: fixed;
+  inset: 0;
+  z-index: 2200;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  color: var(--foam);
+  background:
+    radial-gradient(circle at 50% 45%, rgba(231, 130, 118, 0.25), transparent 30%),
+    radial-gradient(circle at 22% 78%, rgba(105, 172, 168, 0.18), transparent 31%),
+    linear-gradient(145deg, rgba(5, 25, 35, 0.98), rgba(20, 57, 69, 0.98));
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.04);
+  transition: opacity 0.5s, visibility 0.5s, transform 0.65s var(--ease);
+  overflow: hidden;
+}
+
+.love-easter-egg.open {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.love-easter-egg::before,
+.love-easter-egg::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(237, 247, 243, 0.1);
+  border-radius: 50%;
+}
+
+.love-easter-egg::before {
+  width: min(78vw, 800px);
+  aspect-ratio: 1;
+}
+
+.love-easter-egg::after {
+  width: min(54vw, 540px);
+  aspect-ratio: 1;
+}
+
+.love-egg-close {
+  position: absolute;
+  top: 24px;
+  right: 25px;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(237, 247, 243, 0.25);
+  border-radius: 50%;
+  color: var(--foam);
+  background: rgba(7, 29, 41, 0.22);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.love-egg-aura {
+  position: absolute;
+  width: min(66vw, 660px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(231, 130, 118, 0.22), transparent 68%);
+  animation: loveAura 3.2s ease-in-out infinite;
+}
+
+.love-egg-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+}
+
+.love-egg-kicker {
+  display: block;
+  margin-bottom: 21px;
+  color: var(--gold-light);
+  font-family: var(--english);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+}
+
+.love-egg-content strong {
+  display: block;
+  color: var(--rose-light);
+  font-family: var(--serif);
+  font-size: clamp(92px, 18vw, 250px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.08em;
+  text-shadow: 0 0 45px rgba(242, 182, 168, 0.32);
+  transform: scale(0.55);
+  opacity: 0;
+}
+
+.love-easter-egg.open .love-egg-content strong {
+  animation: giantLove 1s 0.12s var(--ease) forwards;
+}
+
+.love-egg-content p {
+  margin: 30px 0 21px;
+  color: rgba(237, 247, 243, 0.72);
+  font-family: var(--serif);
+  font-size: clamp(14px, 1.8vw, 20px);
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+}
+
+.love-egg-content small {
+  color: rgba(237, 247, 243, 0.38);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+.love-egg-hearts {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.egg-floating-heart {
+  position: absolute;
+  bottom: -40px;
+  left: var(--x);
+  color: var(--color);
+  font-size: var(--size);
+  opacity: 0;
+  animation: eggHeartRise var(--duration) var(--delay) ease-out forwards;
 }
 
 .editor-fab {
@@ -2848,6 +3022,34 @@ img {
   63% { transform: scale(1.1); }
 }
 
+@keyframes candleHintFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-6px) rotate(-1deg); }
+}
+
+@keyframes heartCharge {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.22); }
+  100% { transform: scale(1); }
+}
+
+@keyframes loveAura {
+  0%, 100% { opacity: 0.65; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes giantLove {
+  0% { opacity: 0; transform: scale(0.52) rotate(-4deg); filter: blur(10px); }
+  65% { opacity: 1; transform: scale(1.08) rotate(1deg); filter: blur(0); }
+  100% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+}
+
+@keyframes eggHeartRise {
+  0% { opacity: 0; transform: translateY(0) scale(0.45) rotate(-12deg); }
+  18% { opacity: 0.85; }
+  100% { opacity: 0; transform: translateY(-110vh) scale(1.1) rotate(18deg); }
+}
+
 @keyframes gateRecord {
   to { transform: rotate(360deg); }
 }
@@ -3145,6 +3347,11 @@ img {
 
   .birthday-wish {
     grid-template-columns: 1fr;
+  }
+
+  .candle-action-hint {
+    top: 104px;
+    right: -3px;
   }
 
   .cake-scene {
