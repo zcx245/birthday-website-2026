@@ -96,7 +96,12 @@
   let musicIsPlaying = false;
   let musicHasStarted = false;
   let currentTrackId = "shortTrack";
-  let musicPreloadPromise = null;
+  const musicTrackPromises = new Map();
+  const MUSIC_TRACKS = {
+    shortTrack: "assets/birthday-short.mp3",
+    coralTrack: "assets/coral-sea.mp3?v=96k"
+  };
+  let musicWarmupStarted = false;
   let heartClickCount = 0;
   let loveEggTimer = null;
 
@@ -595,31 +600,68 @@
     button.setAttribute("aria-label", playing ? "暂停背景音乐" : "播放背景音乐");
   }
 
-  function ensureMusicReady() {
-    if (musicPreloadPromise) return musicPreloadPromise;
-    const tracks = {
-      shortTrack: "assets/birthday-short.mp3",
-      coralTrack: "assets/coral-sea.mp3"
-    };
-    musicPreloadPromise = Promise.all(
-      Object.entries(tracks).map(async ([id, source]) => {
-        const response = await fetch(source, { cache: "force-cache" });
-        if (!response.ok) throw new Error(`Music download failed: ${source}`);
-        const blob = await response.blob();
-        const element = document.getElementById(id);
-        element.src = URL.createObjectURL(blob);
-        element.load();
-      })
-    ).then(() => true).catch((error) => {
+  async function downloadMusicBlob(source, slow = false) {
+    const response = await fetch(source, { cache: "force-cache" });
+    if (!response.ok) throw new Error(`Music download failed: ${source}`);
+    if (!slow || !response.body || typeof response.body.getReader !== "function") {
+      return response.blob();
+    }
+
+    const reader = response.body.getReader();
+    const chunks = [];
+    let chunkCount = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
+      chunkCount += 1;
+      if (chunkCount % 2 === 0) {
+        await new Promise((resolve) => setTimeout(resolve, 45));
+      }
+    }
+    return new Blob(chunks, { type: "audio/mpeg" });
+  }
+
+  function ensureTrackReady(trackId, slow = false) {
+    if (musicTrackPromises.has(trackId)) return musicTrackPromises.get(trackId);
+    const source = MUSIC_TRACKS[trackId];
+    if (!source) return Promise.resolve(false);
+
+    const promise = downloadMusicBlob(source, slow).then((blob) => {
+      const element = document.getElementById(trackId);
+      if (!element) return false;
+      element.src = URL.createObjectURL(blob);
+      element.load();
+      return true;
+    }).catch((error) => {
       console.warn(error);
-      musicPreloadPromise = null;
+      musicTrackPromises.delete(trackId);
       return false;
     });
-    return musicPreloadPromise;
+    musicTrackPromises.set(trackId, promise);
+    return promise;
+  }
+
+  function warmMusicLibrary() {
+    if (musicWarmupStarted) return;
+    musicWarmupStarted = true;
+    const start = () => {
+      ensureTrackReady("shortTrack");
+      setTimeout(() => ensureTrackReady("coralTrack", true), 450);
+    };
+    const hero = $("#heroImage");
+    if (hero?.complete) {
+      start();
+    } else if (hero) {
+      hero.addEventListener("load", start, { once: true });
+    } else {
+      setTimeout(start, 1000);
+    }
   }
 
   async function playMusicTrack(trackId, restart = false) {
-    await ensureMusicReady();
+    const ready = await ensureTrackReady(trackId);
+    if (!ready) return false;
     const track = document.getElementById(trackId);
     if (!track) return false;
     if (restart) track.currentTime = 0;
@@ -681,8 +723,8 @@
     const startLabel = $(".music-start-label");
     startButton.addEventListener("click", async () => {
       startButton.disabled = true;
-      startLabel.textContent = "正在准备音乐…";
-      await ensureMusicReady();
+      startLabel.textContent = "正在准备生日语音…";
+      await ensureTrackReady("shortTrack");
       startLabel.textContent = "开启生日音乐";
       if (!musicIsPlaying) await toggleMusic();
       if (!musicIsPlaying) {
@@ -1057,6 +1099,7 @@
     setupCursorGlow();
     setupMusicPlaylist();
     setupMusicGate();
+    warmMusicLibrary();
     setupSiteDataExportShortcut();
     createStarField($("#heroStarField"), 34);
     createStarField($("#finaleStars"), 44);
